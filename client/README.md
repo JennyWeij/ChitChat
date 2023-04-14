@@ -1,5 +1,2 @@
-# Klientprojektet
-
-TA BORT DEN HÄR FILEN OCH INITIERA KODBASEN MED VITE, NI VÄLJER RAMVERK: REACT, VUE, SOLID, SVELTE.
-
-TÄNK PÅ ATT KONFIGURERA VITE'S PROXY SÅ ATT KLIENTEN KAN KOMMA ÅT APIET.
+## Köra client
+När du först öppnar terminalen så kör du `cd client` och sedan när du står i client-mappen så kör du `npm run dev`.
