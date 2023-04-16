@@ -11,38 +11,66 @@ export let theme: Theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Montserrat"].join(','),
+    fontFamily: ["Montserrat", "Sarabun", "Sulphur Point"].join(","),
     h1: {
-        fontSize: '2.5rem',
-        color: 'white',
+      fontSize: "2.5rem",
+      color: "#7A9C6A",
     },
     body1: {
-        fontSize: '20px',
+      fontSize: "20px",
+    },
   },
-},
   palette: {
     primary: {
-      main: '#DCEFD3',
+      main: "#DCEFD3",
     },
     secondary: {
-      main: '#AAD098',
+      main: "#AAD098",
+    },
+    darktext: {
+      main: "#7A9C6A",
     },
     darkaccent: {
-      main: '#4E4E4E',
+      main: "#4E4E4E",
     },
     lightaccent: {
-        main: '#A99693',
+      main: "#A99693",
+    },
+  },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
     },
   },
 });
 
-declare module '@mui/material/styles' {
-    interface Palette {
-      darkaccent: Palette['primary'];
-      lightaccent: Palette['primary'];
-    }
-    interface PaletteOptions {
-      darkaccent?: PaletteOptions['primary'];
-      lightaccent?: PaletteOptions['primary'];
-    }
+declare module "@mui/material/styles" {
+  interface Palette {
+    darktext: Palette["primary"];
+    darkaccent: Palette["primary"];
+    lightaccent: Palette["primary"];
   }
+  interface PaletteOptions {
+    darktext?: PaletteOptions["primary"];
+    darkaccent?: PaletteOptions["primary"];
+    lightaccent?: PaletteOptions["primary"];
+  }
+}
