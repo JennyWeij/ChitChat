@@ -17,9 +17,9 @@ export default function SignupPage() {
         <Box
           sx={{
             width: "32rem",
-            height: "14rem",
+            height: "13rem",
             marginTop: "2rem",
-            marginBottom: "2rem",
+            marginBottom: "2.5rem",
             backgroundColor: theme.palette.secondary.main,
             borderRadius: "35px",
             textAlign: "center",
