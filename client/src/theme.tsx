@@ -11,13 +11,24 @@ export let theme: Theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Montserrat", "Sarabun", "Sulphur Point"].join(","),
+    fontFamily: ["Montserrat", "Sarabun", "Sulphur Point", "Lato"].join(","),
     h1: {
-      fontSize: "2.5rem",
+      fontSize: "3.5rem",
       color: "#7A9C6A",
     },
-    body1: {
+    h2: {
+      fontSize: "2rem",
+      color: "#7A9C6A",
+    },
+    h5: {
+      color: "#57724B",
+      fontWeight: 700,
       fontSize: "20px",
+    },
+    body2: {
+      fontSize: "20px",
+      fontFamily: "Lato",
+      color: "#57724B",
     },
   },
   palette: {
@@ -27,13 +38,13 @@ export let theme: Theme = createTheme({
     secondary: {
       main: "#AAD098",
     },
-    darktext: {
+    mediumtext: {
       main: "#7A9C6A",
     },
-    darkaccent: {
-      main: "#4E4E4E",
+    darktext: {
+      main: "#57724B",
     },
-    lightaccent: {
+    lighttext: {
       main: "#A99693",
     },
   },
@@ -64,13 +75,13 @@ export let theme: Theme = createTheme({
 
 declare module "@mui/material/styles" {
   interface Palette {
+    mediumtext: Palette["primary"];
     darktext: Palette["primary"];
-    darkaccent: Palette["primary"];
-    lightaccent: Palette["primary"];
+    lighttext: Palette["primary"];
   }
   interface PaletteOptions {
+    mediumtext?: PaletteOptions["primary"];
     darktext?: PaletteOptions["primary"];
-    darkaccent?: PaletteOptions["primary"];
-    lightaccent?: PaletteOptions["primary"];
+    lighttext?: PaletteOptions["primary"];
   }
 }

@@ -18,5 +18,4 @@ const headerBoxStyling = {
 
 const logoStyling = {
   fontFamily: "Montserrat",
-  fontSize: "64px",
 }

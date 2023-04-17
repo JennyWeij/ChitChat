@@ -48,7 +48,7 @@ const styledButtonLight = {
   color: theme.palette.darktext.main,
   backgroundColor: theme.palette.primary.main,
   "&:hover": {
-    color: "white",
+    color: theme.palette.primary.main,
     backgroundColor: theme.palette.darktext.main,
     boxShadow: "none",
   },
@@ -56,7 +56,7 @@ const styledButtonLight = {
 
 const styledButtonDark = {
   ...commonButtonStyling,
-  color: "white",
+  color: theme.palette.primary.main,
   backgroundColor: theme.palette.darktext.main,
   "&:hover": {
     color: theme.palette.darktext.main,

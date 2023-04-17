@@ -1,5 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
+import SinglePost from "../components/SinglePost";
 import TextButton from "../components/TextButton";
+import { theme } from "../theme";
 
 export default function StartPage() {
   return (
@@ -9,20 +11,29 @@ export default function StartPage() {
         <TextButton mode="dark">Create Account</TextButton>
       </Box>
       <Box sx={wallContainer}>
-      <Typography>Lastest posts</Typography>
+        <Typography variant="h2">Lastest posts</Typography>
+        <Divider sx={dividerStyling}/>
       </Box>
+      <SinglePost />
     </Box>
   );
 }
 
 const buttonContainer = {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "30px",
-}
+  display: "flex",
+  justifyContent: "center",
+  gap: "40px",
+};
 
 const wallContainer = {
-    display: "flex",
+  display: "flex",
+  marginTop: "3rem",
+  alignItems: "center",
+  flexDirection: "column",
+};
 
-
+const dividerStyling = {
+    backgroundColor: theme.palette.mediumtext.main,
+    width: "80%",
+    margin: "1rem",
 }
