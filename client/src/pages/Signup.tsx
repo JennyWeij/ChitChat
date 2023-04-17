@@ -23,29 +23,44 @@ export default function SignupPage() {
             backgroundColor: theme.palette.secondary.main,
             borderRadius: "35px",
             textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "end",
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            gridTemplateRows: "repeat(2, 1fr)",
+            gap: "1rem",
+            alignItems: "center",
+            justifyItems: "center",
           }}
         >
+          <Typography variant="h4" marginLeft="1.5rem" gridColumn="1">
+            Create username
+          </Typography>
           <TextField
             id="outlined-basic"
             // label="Username"
             variant="outlined"
             sx={{
               backgroundColor: "white",
-              marginTop: "2rem",
-              marginBottom: "2rem",
-              marginRight: "1.5rem",
+              gridColumn: "2",
+              gridRow: "1",
+              marginRight: "1rem",
             }}
           />
+          <Typography variant="h4" marginLeft="1.5rem" gridColumn="1">
+            Create password
+          </Typography>
           <TextField
             id="outlined-basic"
             // label="Password"
             variant="outlined"
-            sx={{ backgroundColor: "white", marginRight: "1.5rem" }}
+            sx={{
+              backgroundColor: "white",
+              gridColumn: "2",
+              gridRow: "2",
+              marginRight: "1rem",
+            }}
           />
         </Box>
+
         <TextButton mode="light">Register</TextButton>
       </Box>
     </Box>

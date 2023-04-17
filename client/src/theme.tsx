@@ -20,6 +20,10 @@ export let theme: Theme = createTheme({
       fontSize: "2rem",
       color: "#7A9C6A",
     },
+    h4: {
+      fontSize: "1.5rem",
+      color: "white",
+    },
     h5: {
       color: "#57724B",
       fontWeight: 700,
@@ -52,21 +56,21 @@ export let theme: Theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
