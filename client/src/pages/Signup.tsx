@@ -16,8 +16,8 @@ export default function SignupPage() {
         <Typography variant="h2">Register new user</Typography>
         <Box
           sx={{
-            width: "30rem",
-            height: "13rem",
+            width: "32rem",
+            height: "14rem",
             marginTop: "2rem",
             marginBottom: "2rem",
             backgroundColor: theme.palette.secondary.main,
@@ -26,12 +26,12 @@ export default function SignupPage() {
             display: "grid",
             gridTemplateColumns: "auto 1fr",
             gridTemplateRows: "repeat(2, 1fr)",
-            gap: "1rem",
+            gap: "0.2rem",
             alignItems: "center",
             justifyItems: "center",
           }}
         >
-          <Typography variant="h4" marginLeft="1.5rem" gridColumn="1">
+          <Typography variant="h4" marginLeft="2rem" gridColumn="1">
             Create username
           </Typography>
           <TextField
@@ -45,7 +45,7 @@ export default function SignupPage() {
               marginRight: "1rem",
             }}
           />
-          <Typography variant="h4" marginLeft="1.5rem" gridColumn="1">
+          <Typography variant="h4" marginLeft="2rem" gridColumn="1">
             Create password
           </Typography>
           <TextField

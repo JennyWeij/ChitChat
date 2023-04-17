@@ -21,7 +21,7 @@ export let theme: Theme = createTheme({
       color: "#7A9C6A",
     },
     h4: {
-      fontSize: "1.5rem",
+      fontSize: "1.3rem",
       color: "white",
     },
     h5: {
