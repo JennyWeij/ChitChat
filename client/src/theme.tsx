@@ -96,6 +96,7 @@ export let themeAdmin: Theme = createTheme({
       xl: 1536,
     },
   },
+
   typography: {
     fontFamily: ["Montserrat", "Sarabun", "Sulphur Point", "Lato"].join(","),
     h1: {
@@ -119,19 +120,19 @@ export let themeAdmin: Theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#41719E",
+      main: "#E1EEFA",
     },
     secondary: {
-      main: "#41719E",
+      main: "#C0D9EF",
     },
     mediumtext: {
-      main: "#41719E",
+      main: "#6AA1D3",
     },
     darktext: {
       main: "#41719E",
     },
     lighttext: {
-      main: "#41719E",
+      main: "#A99693",
     },
   },
   components: {

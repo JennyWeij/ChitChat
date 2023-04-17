@@ -1,6 +1,15 @@
-import { DeleteOutline, EditNote, PersonOutline } from "@mui/icons-material";
-import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
-import { theme } from "../theme";
+import { PersonOutline } from "@mui/icons-material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import { theme, themeAdmin } from "../theme";
+import AlertDialog from "./AlertDialog";
+import EditDialogAdmin from "./EditDialogAdmin";
 
 interface Props {
   name: string;
@@ -10,27 +19,29 @@ interface Props {
 
 export default function AdminSinglePost({ name, timestamp, content }: Props) {
   return (
-    <Box sx={flexBox}>
-      <Card sx={cardStyling}>
-        <CardContent>
-          <Box sx={cardHeader}>
-            <Box sx={nameAndIcon}>
-              <PersonOutline sx={iconStyling} />
-              <Typography variant="h5">{name}</Typography>
+    <ThemeProvider theme={themeAdmin}>
+      <Box sx={flexBox}>
+        <Card sx={cardStyling}>
+          <CardContent>
+            <Box sx={cardHeader}>
+              <Box sx={nameAndIcon}>
+                <PersonOutline sx={iconStyling} />
+                <Typography variant="h5">{name}</Typography>
+              </Box>
+              <Typography sx={timeStyling}>{timestamp}</Typography>
             </Box>
-            <Typography sx={timeStyling}>{timestamp}</Typography>
-          </Box>
-          <Divider sx={dividerStyling} />
-          <Box>
-            <Typography variant="body2">{content}</Typography>
-          </Box>
-        </CardContent>
-      </Card>
-      <Box sx={editDelete}>
-        <EditNote sx={{ margin: "0.5rem" }} />
-        <DeleteOutline sx={{ margin: "0.5rem" }} />
+            <Divider sx={dividerStyling} />
+            <Box>
+              <Typography variant="body2">{content}</Typography>
+            </Box>
+          </CardContent>
+        </Card>
+        <Box sx={editDelete}>
+          <EditDialogAdmin />
+          <AlertDialog />
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 
@@ -54,12 +65,12 @@ const nameAndIcon = {
 
 const iconStyling = {
   fontSize: "30px",
-  color: theme.palette.darktext.main,
+  color: themeAdmin.palette.darktext.main,
 };
 
 const dividerStyling = {
   margin: "12px 0",
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: themeAdmin.palette.primary.main,
 };
 
 const timeStyling = {
