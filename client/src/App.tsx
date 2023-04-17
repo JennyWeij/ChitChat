@@ -11,7 +11,7 @@ export default function App() {
       <Box sx={boxStyling}>
         <Header />
         <main style={mainStyling}>
-        <Outlet />
+          <Outlet />
         </main>
       </Box>
     </ThemeProvider>
@@ -19,11 +19,11 @@ export default function App() {
 }
 
 const boxStyling = {
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
-}
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100vh",
+};
 
 const mainStyling = {
   marginTop: "100px",
-}
+};
