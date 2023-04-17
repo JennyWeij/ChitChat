@@ -6,6 +6,7 @@ interface Props {
   children: React.ReactNode;
   to?: string;
   onClick?: () => void;
+  mode: "light" | "dark";
   type?: "button" | "submit";
 }
 
@@ -14,6 +15,7 @@ export default function TextButton({
   children,
   onClick,
   type = "button",
+  mode = "light",
 }: Props) {
   return (
     <Link
@@ -22,7 +24,7 @@ export default function TextButton({
     >
       <Button
         variant="contained"
-        sx={styledButton}
+        sx={mode === "light" ? styledButtonLight : styledButtonDark}
         onClick={onClick}
         type={type}
       >
@@ -32,11 +34,34 @@ export default function TextButton({
   );
 }
 
-const styledButton = {
-  color: theme.palette.darkaccent.main,
+const commonButtonStyling = {
+  borderStyle: "solid",
+  borderRadius: "20px",
+  borderWidth: "1px",
+  borderColor: theme.palette.darktext.main,
+  paddingTop: "0.2rem",
+  paddingBottom: "0.2rem",
+}
+
+const styledButtonLight = {
+  ...commonButtonStyling,
+  color: theme.palette.darktext.main,
+  backgroundColor: theme.palette.primary.main,
   "&:hover": {
     color: theme.palette.primary.main,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.darktext.main,
+    boxShadow: "none",
+  },
+};
+
+const styledButtonDark = {
+  ...commonButtonStyling,
+  color: theme.palette.primary.main,
+  backgroundColor: theme.palette.darktext.main,
+  "&:hover": {
+    color: theme.palette.darktext.main,
+    backgroundColor: theme.palette.primary.main,
+    boxShadow: "none",
   },
 };
 

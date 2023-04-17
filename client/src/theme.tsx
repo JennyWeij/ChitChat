@@ -11,38 +11,77 @@ export let theme: Theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Montserrat"].join(','),
+    fontFamily: ["Montserrat", "Sarabun", "Sulphur Point", "Lato"].join(","),
     h1: {
-        fontSize: '2.5rem',
-        color: 'white',
+      fontSize: "3.5rem",
+      color: "#7A9C6A",
     },
-    body1: {
-        fontSize: '20px',
+    h2: {
+      fontSize: "2rem",
+      color: "#7A9C6A",
+    },
+    h5: {
+      color: "#57724B",
+      fontWeight: 700,
+      fontSize: "20px",
+    },
+    body2: {
+      fontSize: "20px",
+      fontFamily: "Lato",
+      color: "#57724B",
+    },
   },
-},
   palette: {
     primary: {
-      main: '#DCEFD3',
+      main: "#DCEFD3",
     },
     secondary: {
-      main: '#AAD098',
+      main: "#AAD098",
     },
-    darkaccent: {
-      main: '#4E4E4E',
+    mediumtext: {
+      main: "#7A9C6A",
     },
-    lightaccent: {
-        main: '#A99693',
+    darktext: {
+      main: "#57724B",
+    },
+    lighttext: {
+      main: "#A99693",
+    },
+  },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
     },
   },
 });
 
-declare module '@mui/material/styles' {
-    interface Palette {
-      darkaccent: Palette['primary'];
-      lightaccent: Palette['primary'];
-    }
-    interface PaletteOptions {
-      darkaccent?: PaletteOptions['primary'];
-      lightaccent?: PaletteOptions['primary'];
-    }
+declare module "@mui/material/styles" {
+  interface Palette {
+    mediumtext: Palette["primary"];
+    darktext: Palette["primary"];
+    lighttext: Palette["primary"];
   }
+  interface PaletteOptions {
+    mediumtext?: PaletteOptions["primary"];
+    darktext?: PaletteOptions["primary"];
+    lighttext?: PaletteOptions["primary"];
+  }
+}
