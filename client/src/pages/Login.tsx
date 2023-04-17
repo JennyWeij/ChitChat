@@ -28,7 +28,7 @@ export default function LoginPage() {
             gridTemplateRows: "repeat(2, 1fr)",
             gap: "0.2rem",
             alignItems: "center",
-            justifyItems: "center",
+            justifyItems: "start",
           }}
         >
           <Typography variant="h4" marginLeft="4rem" gridColumn="1">
@@ -43,6 +43,7 @@ export default function LoginPage() {
               gridColumn: "2",
               gridRow: "1",
               marginRight: "1rem",
+              marginLeft: "1rem",
             }}
           />
           <Typography variant="h4" marginLeft="4rem" gridColumn="1">
@@ -57,6 +58,7 @@ export default function LoginPage() {
               gridColumn: "2",
               gridRow: "2",
               marginRight: "1rem",
+              marginLeft: "1rem",
             }}
           />
         </Box>
