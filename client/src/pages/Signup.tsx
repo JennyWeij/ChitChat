@@ -38,7 +38,7 @@ export default function SignupPage() {
             id="outlined-basic"
             variant="outlined"
             sx={{
-              backgroundColor: "white",
+              backgroundColor: theme.palette.white.main,
               gridColumn: "2",
               gridRow: "1",
               marginRight: "1rem",
@@ -52,7 +52,7 @@ export default function SignupPage() {
             id="outlined-basic"
             variant="outlined"
             sx={{
-              backgroundColor: "white",
+              backgroundColor: theme.palette.white.main,
               gridColumn: "2",
               gridRow: "2",
               marginRight: "1rem",

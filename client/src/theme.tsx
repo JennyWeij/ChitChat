@@ -51,6 +51,9 @@ export let theme: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
+    white: {
+      main: "#FFFFFF",
+    },
   },
   components: {
     MuiPaper: {
@@ -82,10 +85,12 @@ declare module "@mui/material/styles" {
     mediumtext: Palette["primary"];
     darktext: Palette["primary"];
     lighttext: Palette["primary"];
+    white: Palette["primary"];
   }
   interface PaletteOptions {
     mediumtext?: PaletteOptions["primary"];
     darktext?: PaletteOptions["primary"];
     lighttext?: PaletteOptions["primary"];
+    white?: PaletteOptions["primary"];
   }
 }
