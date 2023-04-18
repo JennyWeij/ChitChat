@@ -61,7 +61,7 @@ export default function EditDialogAdmin() {
 
   return (
     <div>
-      <EditNote onClick={handleClickOpen} />
+      <EditNote sx={editIcon} onClick={handleClickOpen} />
 
       <BootstrapDialog
         onClose={handleClose}
@@ -86,3 +86,10 @@ export default function EditDialogAdmin() {
     </div>
   );
 }
+
+const editIcon = {
+  "&:hover": {
+    color: "white",
+    boxShadow: "none",
+  },
+};

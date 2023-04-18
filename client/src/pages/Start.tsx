@@ -12,7 +12,7 @@ export default function StartPage() {
         <TextButton mode="dark">Create Account</TextButton>
       </Box>
       <Box sx={wallContainer}>
-        <Typography variant="h2">Lastest posts</Typography>
+        <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
           {posts.map((post, index) => (

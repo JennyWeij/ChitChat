@@ -9,9 +9,8 @@ export default function AdminPage() {
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={wallContainer}>
-          <Typography variant="h2">Latest posts</Typography>
+          <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
-
           <Box sx={wallBackground}>
             {posts.map((post, index) => (
               <AdminSinglePost

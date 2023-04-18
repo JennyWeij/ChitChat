@@ -23,7 +23,7 @@ export default function AlertDialog() {
   return (
     <ThemeProvider theme={themeAdmin}>
       <div>
-        <DeleteOutline sx={{ margin: "0.5rem" }} onClick={handleClickOpen} />
+        <DeleteOutline sx={deleteIcon} onClick={handleClickOpen} />
         <Dialog
           open={open}
           onClose={handleClose}
@@ -52,4 +52,12 @@ export default function AlertDialog() {
 
 const buttonText = {
   color: themeAdmin.palette.darktext.main,
+};
+
+const deleteIcon = {
+  "&:hover": {
+    color: "tomato",
+
+    boxShadow: "none",
+  },
 };

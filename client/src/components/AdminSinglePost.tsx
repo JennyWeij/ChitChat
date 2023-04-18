@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import { theme, themeAdmin } from "../theme";
+import { themeAdmin } from "../theme";
 import AlertDialog from "./AlertDialog";
 import EditDialogAdmin from "./EditDialogAdmin";
 
@@ -74,7 +74,7 @@ const dividerStyling = {
 };
 
 const timeStyling = {
-  color: theme.palette.lighttext.main,
+  color: themeAdmin.palette.lighttext.main,
   fontFamily: "Sulphur Point",
   fontSize: "20px",
 };
@@ -83,6 +83,8 @@ const editDelete = {
   display: "flex",
   flexDirection: "column",
   marginLeft: "0.4rem",
+  gap: "1rem",
+  marginTop: "1.5rem",
 };
 
 const flexBox = {

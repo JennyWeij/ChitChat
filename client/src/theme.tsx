@@ -96,7 +96,6 @@ export let themeAdmin: Theme = createTheme({
       xl: 1536,
     },
   },
-
   typography: {
     fontFamily: ["Montserrat", "Sarabun", "Sulphur Point", "Lato"].join(","),
     h1: {
@@ -134,7 +133,11 @@ export let themeAdmin: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
+    background: {
+      default: "tomato", // replace with your desired background color
+    },
   },
+
   components: {
     MuiPaper: {
       styleOverrides: {
