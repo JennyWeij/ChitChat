@@ -36,7 +36,6 @@ export default function LoginPage() {
           </Typography>
           <TextField
             id="outlined-basic"
-            // label="Username"
             variant="outlined"
             sx={{
               backgroundColor: "white",
@@ -51,7 +50,6 @@ export default function LoginPage() {
           </Typography>
           <TextField
             id="outlined-basic"
-            // label="Password"
             variant="outlined"
             sx={{
               backgroundColor: "white",
