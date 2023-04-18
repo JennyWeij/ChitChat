@@ -1,4 +1,4 @@
-import { Theme, createTheme } from "@mui/material";
+import { createTheme, Theme } from "@mui/material";
 
 export let theme: Theme = createTheme({
   breakpoints: {
@@ -47,26 +47,32 @@ export let theme: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
+    black: {
+      main: "#000000",
+    },
+    lightgrey: {
+      main: "#d3d3d3",
+    },
   },
   components: {
     MuiPaper: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
@@ -78,10 +84,14 @@ declare module "@mui/material/styles" {
     mediumtext: Palette["primary"];
     darktext: Palette["primary"];
     lighttext: Palette["primary"];
+    black: Palette["primary"];
+    lightgrey: Palette["primary"];
   }
   interface PaletteOptions {
     mediumtext?: PaletteOptions["primary"];
     darktext?: PaletteOptions["primary"];
     lighttext?: PaletteOptions["primary"];
+    black?: PaletteOptions["primary"];
+    lightgrey?: PaletteOptions["primary"];
   }
 }
