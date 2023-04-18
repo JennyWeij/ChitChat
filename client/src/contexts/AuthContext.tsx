@@ -6,12 +6,14 @@ interface Props {
 
 export interface AuthContextValue {
   isLoggedIn: boolean;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
   login: () => void;
   logout: () => void;
 }
 
 const initialAuthValues: AuthContextValue = {
   isLoggedIn: false,
+  setIsLoggedIn: () => {},
   login: () => {},
   logout: () => {},
 };
@@ -32,7 +34,7 @@ export default function AuthProvider({ children }: Props) {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
