@@ -31,7 +31,7 @@ export default function AdminSinglePost({ name, timestamp, content }: Props) {
               <Typography sx={timeStyling}>{timestamp}</Typography>
             </Box>
             <Divider sx={dividerStyling} />
-            <Box>
+            <Box sx={contentStyle}>
               <Typography variant="body2">{content}</Typography>
             </Box>
           </CardContent>
@@ -49,12 +49,16 @@ const cardStyling = {
   maxWidth: "500px",
   borderRadius: "20px",
   padding: "5px 15px",
+  minWidth: "300px",
 };
 
 const cardHeader = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  "@media (max-width: 600px)": {
+    flexDirection: "column",
+  },
 };
 
 const nameAndIcon = {
@@ -79,15 +83,31 @@ const timeStyling = {
   fontSize: "20px",
 };
 
+const contentStyle = {
+  "@media (max-width: 600px)": {
+    width: "100%",
+  },
+};
+
 const editDelete = {
   display: "flex",
+  justifyContent: "center",
   flexDirection: "column",
   marginLeft: "0.4rem",
   gap: "1rem",
   marginTop: "1.5rem",
   color: themeAdmin.palette.darktext.main,
+  "@media (max-width: 600px)": {
+    flexDirection: "row",
+    marginTop: "0.5rem",
+  },
 };
 
 const flexBox = {
   display: "flex",
+  justifyContent: "center",
+  flexDirection: "row",
+  "@media (max-width: 600px)": {
+    flexDirection: "column",
+  },
 };
