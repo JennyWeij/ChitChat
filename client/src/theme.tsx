@@ -51,8 +51,16 @@ export let theme: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
+
+    black: {
+      main: "#000000",
+    },
+    lightgrey: {
+      main: "#d3d3d3",
+
     white: {
       main: "#FFFFFF",
+
     },
   },
   components: {
@@ -60,6 +68,7 @@ export let theme: Theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
+
         },
       },
     },
@@ -151,6 +160,7 @@ export let themeAdmin: Theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
+
         },
       },
     },
@@ -176,10 +186,14 @@ declare module "@mui/material/styles" {
     mediumtext: Palette["primary"];
     darktext: Palette["primary"];
     lighttext: Palette["primary"];
+    black: Palette["primary"];
+    lightgrey: Palette["primary"];
   }
   interface PaletteOptions {
     mediumtext?: PaletteOptions["primary"];
     darktext?: PaletteOptions["primary"];
     lighttext?: PaletteOptions["primary"];
+    black?: PaletteOptions["primary"];
+    lightgrey?: PaletteOptions["primary"];
   }
 }
