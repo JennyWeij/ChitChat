@@ -13,7 +13,7 @@ export default function LoginLogoutButton() {
   };
 
   return (
-    <TextButton mode="dark" onClick={handleClick}>
+    <TextButton mode="light" onClick={handleClick}>
       {isLoggedIn ? 'Logout' : 'Login'}
     </TextButton>
   );

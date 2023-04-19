@@ -1,26 +1,22 @@
-import {
-    Box,
-    FormControl,
-    InputLabel,
-    TextField,
-    Typography,
-} from "@mui/material";
+import { Box, InputLabel, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { theme } from "../theme";
 import TextButton from "./TextButton";
 
 const validationSchema = Yup.object().shape({
+  title: Yup.string().required("Required"),
   content: Yup.string().required("Required"),
 });
 
 interface Props {
-  onSubmit: (values: { content: string }) => void;
+  onSubmit: (values: { title: string; content: string }) => void;
 }
 
 export default function CreatePostForm({ onSubmit }: Props) {
   const formik = useFormik({
     initialValues: {
+      title: "",
       content: "",
     },
     validationSchema,
@@ -30,15 +26,27 @@ export default function CreatePostForm({ onSubmit }: Props) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={formContainer}>
-        <InputLabel htmlFor="content">
-          <Typography variant="h2">Create a new post</Typography>
-        </InputLabel>
+        <Typography variant="h2">Create a new post</Typography>
         <Box sx={formBackground}>
-          <FormControl
-            fullWidth
-            error={Boolean(formik.errors.content && formik.touched.content)}
-          >
+          <Box sx={inputRow}>
+            <InputLabel htmlFor="title">Title</InputLabel>
             <TextField
+              sx={textField}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              id="title"
+              name="title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={Boolean(formik.errors.title && formik.touched.title)}
+            />
+          </Box>
+          <Box sx={inputRow}>
+            <InputLabel htmlFor="content">Content</InputLabel>
+            <TextField
+              sx={textField}
               fullWidth
               margin="normal"
               variant="outlined"
@@ -49,10 +57,9 @@ export default function CreatePostForm({ onSubmit }: Props) {
               value={formik.values.content}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              //helperText={formik.touched.content && formik.errors.content}
               error={Boolean(formik.errors.content && formik.touched.content)}
             />
-          </FormControl>
+          </Box>
           <Box sx={buttonContainer}>
             <TextButton mode="dark">Post</TextButton>
           </Box>
@@ -79,9 +86,20 @@ const formBackground = {
   display: "flex",
   flexDirection: "column",
   width: "80%",
-  //gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
   padding: "1rem 2rem",
   borderRadius: "35px",
-  margin: "1rem"
+  margin: "1rem",
+};
+
+const inputRow = {
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  marginBottom: "1rem",
+};
+
+const textField = {
+  marginLeft: 0,
+  marginTop: 0,
 };
