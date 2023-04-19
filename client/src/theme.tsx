@@ -20,6 +20,10 @@ export let theme: Theme = createTheme({
       fontSize: "2rem",
       color: "#7A9C6A",
     },
+    h4: {
+      fontSize: "1.3rem",
+      color: "white",
+    },
     h5: {
       color: "#57724B",
       fontWeight: 700,
@@ -47,26 +51,29 @@ export let theme: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
+    white: {
+      main: "#FFFFFF",
+    },
   },
   components: {
     MuiPaper: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
       },
     },
@@ -78,10 +85,12 @@ declare module "@mui/material/styles" {
     mediumtext: Palette["primary"];
     darktext: Palette["primary"];
     lighttext: Palette["primary"];
+    white: Palette["primary"];
   }
   interface PaletteOptions {
     mediumtext?: PaletteOptions["primary"];
     darktext?: PaletteOptions["primary"];
     lighttext?: PaletteOptions["primary"];
+    white?: PaletteOptions["primary"];
   }
 }
