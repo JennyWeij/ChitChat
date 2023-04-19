@@ -26,6 +26,7 @@ export default function UserStartPage() {
               key={index}
               name={post.name}
               timestamp={post.timestamp}
+              title={post.title}
               content={post.content}
             />
           ))}
@@ -64,5 +65,5 @@ const formBackground = {
   backgroundColor: theme.palette.secondary.main,
   padding: "1rem 2rem",
   borderRadius: "35px",
-  margin: "1rem",
+  margin: "1rem auto",
 };

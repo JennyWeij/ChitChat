@@ -8,8 +8,12 @@ export default function PublicStartPage() {
   return (
     <Box>
       <Box sx={buttonContainer}>
-        <TextButton to="/login" mode="light">Log In</TextButton>
-        <TextButton to="/signup" mode="dark">Create Account</TextButton>
+        <TextButton to="/login" mode="light">
+          Log In
+        </TextButton>
+        <TextButton to="/signup" mode="dark">
+          Create Account
+        </TextButton>
       </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Lastest posts</Typography>
@@ -20,6 +24,7 @@ export default function PublicStartPage() {
               key={index}
               name={post.name}
               timestamp={post.timestamp}
+              title={post.title}
               content={post.content}
             />
           ))}
@@ -30,29 +35,29 @@ export default function PublicStartPage() {
 }
 
 const buttonContainer = {
-    display: "flex",
-    justifyContent: "center",
-    gap: "40px",
-  };
-  
-  const wallContainer = {
-    display: "flex",
-    marginTop: "3rem",
-    alignItems: "center",
-    flexDirection: "column",
-  };
-  
-  const dividerStyling = {
-    backgroundColor: theme.palette.mediumtext.main,
-    width: "80%",
-    margin: "1rem",
-  };
-  
-  const wallBackground = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2rem",
-    backgroundColor: theme.palette.secondary.main,
-    padding: "2rem 6rem",
-    borderRadius: "35px",
-  };
+  display: "flex",
+  justifyContent: "center",
+  gap: "40px",
+};
+
+const wallContainer = {
+  display: "flex",
+  marginTop: "3rem",
+  alignItems: "center",
+  flexDirection: "column",
+};
+
+const dividerStyling = {
+  backgroundColor: theme.palette.mediumtext.main,
+  width: "80%",
+  margin: "1rem",
+};
+
+const wallBackground = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "2rem",
+  backgroundColor: theme.palette.secondary.main,
+  padding: "2rem 6rem",
+  borderRadius: "35px",
+};
