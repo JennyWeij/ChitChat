@@ -85,6 +85,7 @@ const editDelete = {
   marginLeft: "0.4rem",
   gap: "1rem",
   marginTop: "1.5rem",
+  color: themeAdmin.palette.darktext.main,
 };
 
 const flexBox = {

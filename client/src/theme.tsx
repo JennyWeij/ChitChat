@@ -133,9 +133,9 @@ export let themeAdmin: Theme = createTheme({
     lighttext: {
       main: "#A99693",
     },
-    background: {
-      default: "tomato", // replace with your desired background color
-    },
+    // background: {
+    //   default: "#000000",
+    // },
   },
 
   components: {

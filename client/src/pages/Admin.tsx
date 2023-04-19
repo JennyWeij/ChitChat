@@ -1,6 +1,6 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { posts } from "../../data";
-import "../admin.css";
+
 import AdminSinglePost from "../components/AdminSinglePost";
 import { themeAdmin } from "../theme";
 
@@ -27,6 +27,7 @@ export default function AdminPage() {
     </ThemeProvider>
   );
 }
+
 const wallContainer = {
   display: "flex",
   marginTop: "3rem",
