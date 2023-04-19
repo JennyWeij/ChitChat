@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { themeAdmin } from "../theme";
+import EditDeleteButtons from "./EditDeleteButtons";
 
 interface Props {
   name: string;
@@ -34,6 +35,7 @@ export default function AdminSinglePost({ name, timestamp, content }: Props) {
             </Box>
           </CardContent>
         </Card>
+        <EditDeleteButtons />
       </Box>
     </ThemeProvider>
   );
