@@ -4,19 +4,24 @@ import EditDialogAdmin from "./EditDialogAdmin";
 
 export default function EditDeleteButtons() {
   const theme = useTheme();
-  
-    return (
-        <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
-          <EditDialogAdmin />
-          <AlertDialog />
-        </Box>
-    );
-};
+
+  return (
+    <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
+      <EditDialogAdmin />
+      <AlertDialog />
+    </Box>
+  );
+}
 
 const editDelete = {
-    display: "flex",
-    flexDirection: "column",
-    marginLeft: "0.4rem",
-    gap: "1rem",
-    marginTop: "1.5rem",
-  };
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  marginLeft: "0.4rem",
+  gap: "1rem",
+  marginTop: "1.5rem",
+  "@media (max-width: 600px)": {
+    flexDirection: "row",
+    marginTop: "0.5rem",
+  },
+};
