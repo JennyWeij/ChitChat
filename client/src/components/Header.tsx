@@ -1,9 +1,7 @@
 import { AppBar, Box, Typography } from "@mui/material";
-import { useAuth } from "../contexts/AuthContext";
 import LoginLogoutButton from "./LoginLogoutButton";
 
 export default function Header() {
-  const { login, logout, isLoggedIn } = useAuth();
 
   return (
     <AppBar sx={headerBoxStyling}>

@@ -1,23 +1,22 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { posts } from "../../data";
 import { theme } from "../theme";
-import CreatePostForm from "./CreatePostForm";
-import SinglePost from "./SinglePost";
+import SinglePostCard from "./SinglePostCard";
+import TextButton from "./TextButton";
 
-function handleCreatePost(values: { content: string }) {
-  console.log(values);
-}
-
-export default function UserStartPage() {
+export default function PublicStartPage() {
   return (
     <Box>
-      <CreatePostForm onSubmit={handleCreatePost} />
+      <Box sx={buttonContainer}>
+        <TextButton to="/login" mode="light">Log In</TextButton>
+        <TextButton to="/signup" mode="dark">Create Account</TextButton>
+      </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Lastest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
           {posts.map((post, index) => (
-            <SinglePost
+            <SinglePostCard
               key={index}
               name={post.name}
               timestamp={post.timestamp}
@@ -30,7 +29,13 @@ export default function UserStartPage() {
   );
 }
 
-const wallContainer = {
+const buttonContainer = {
+    display: "flex",
+    justifyContent: "center",
+    gap: "40px",
+  };
+  
+  const wallContainer = {
     display: "flex",
     marginTop: "3rem",
     alignItems: "center",

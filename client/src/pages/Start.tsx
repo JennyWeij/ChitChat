@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import PublicStartPage from "../components/PublicStart";
-import UserStartPage from "../components/UserStart";
+import PublicStartPage from "../components/PublicStartPage";
+import UserStartPage from "../components/UserStartPage";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function StartPage() {
