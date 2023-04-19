@@ -50,13 +50,12 @@ export default function AdminControlPanel() {
 }
 
 const panelContainer = {
-  border: "1rem solid white",
+  border: "0.5rem solid white",
   backgroundColor: "white",
   borderRadius: "1rem",
   m: "1rem",
   display: "flex",
   flexDirection: "row",
-  width: "30rem",
 };
 
 const panel = {
@@ -65,5 +64,5 @@ const panel = {
   justifyContent: "space-between",
   p: "0.5rem",
   borderRadius: "0.5rem",
-  width: "30rem",
+  width: { xs: "20rem", sm: "30rem" },
 };
