@@ -87,16 +87,16 @@ export let theme: Theme = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
         },
       },
     },
     MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor: 'white',
-          marginLeft: '1rem',
+          backgroundColor: "white",
+          marginLeft: "1rem",
         },
       },
     },

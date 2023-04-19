@@ -18,6 +18,7 @@ export default function AdminPage() {
                 key={index}
                 name={post.name}
                 timestamp={post.timestamp}
+                title={post.title}
                 content={post.content}
               />
             ))}

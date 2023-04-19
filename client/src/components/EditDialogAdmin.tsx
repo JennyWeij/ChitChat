@@ -1,14 +1,13 @@
 import { EditNote } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
+import CreatePostForm from "./CreatePostForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -62,7 +61,6 @@ export default function EditDialogAdmin() {
   return (
     <div>
       <EditNote sx={editIcon} onClick={handleClickOpen} />
-
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -75,12 +73,19 @@ export default function EditDialogAdmin() {
           Edit post
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>Edit post form goes here</Typography>
+          <CreatePostForm
+            onSubmit={function (values: {
+              title: string;
+              content: string;
+            }): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          {/* <Button autoFocus onClick={handleClose}>
             Save changes
-          </Button>
+          </Button> */}
         </DialogActions>
       </BootstrapDialog>
     </div>

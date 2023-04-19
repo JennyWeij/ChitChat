@@ -8,10 +8,16 @@ import EditDeleteButtons from "./EditDeleteButtons";
 interface Props {
   name: string;
   timestamp: string;
+  title: string;
   content: string;
 }
 
-export default function SinglePostCard({ name, timestamp, content }: Props) {
+export default function SinglePostCard({
+  name,
+  timestamp,
+  title,
+  content,
+}: Props) {
   const { username } = useContext(AuthContext);
 
   const showEditDeleteButtons = name === username;
@@ -28,6 +34,17 @@ export default function SinglePostCard({ name, timestamp, content }: Props) {
             <Typography sx={timeStyling}>{timestamp}</Typography>
           </Box>
           <Divider sx={dividerStyling} />
+          <Typography
+            sx={{
+              textAlign: "left",
+              fontSize: "20px",
+              fontWeight: "bold",
+              marginBottom: "1rem",
+            }}
+            variant="body2"
+          >
+            {title}
+          </Typography>
           <Typography variant="body2">{content}</Typography>
         </CardContent>
       </Card>
