@@ -13,10 +13,16 @@ import EditDeleteButtons from "./EditDeleteButtons";
 interface Props {
   name: string;
   timestamp: string;
+  title: string;
   content: string;
 }
 
-export default function AdminSinglePost({ name, timestamp, content }: Props) {
+export default function AdminSinglePost({
+  name,
+  timestamp,
+  title,
+  content,
+}: Props) {
   return (
     <ThemeProvider theme={themeAdmin}>
       <Box sx={flexBox}>
@@ -31,7 +37,20 @@ export default function AdminSinglePost({ name, timestamp, content }: Props) {
             </Box>
             <Divider sx={dividerStyling} />
             <Box sx={contentStyle}>
-              <Typography variant="body2">{content}</Typography>
+              <Typography
+                sx={{
+                  textAlign: "left",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginBottom: "1rem",
+                }}
+                variant="body2"
+              >
+                {title}
+              </Typography>
+              <Typography sx={{ textAlign: "left" }} variant="body2">
+                {content}
+              </Typography>
             </Box>
           </CardContent>
         </Card>
