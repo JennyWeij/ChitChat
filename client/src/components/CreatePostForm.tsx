@@ -1,7 +1,6 @@
-import { Box, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, InputLabel, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { theme } from "../theme";
 import TextButton from "./TextButton";
 
 const validationSchema = Yup.object().shape({
@@ -26,23 +25,23 @@ export default function CreatePostForm({ onSubmit }: Props) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box sx={formContainer}>
-        <Typography variant="h2">Create a new post</Typography>
-        <Box sx={formBackground}>
-          <Box sx={inputRow}>
-            <InputLabel htmlFor="title">Title</InputLabel>
-            <TextField
-              sx={textField}
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              id="title"
-              name="title"
-              value={formik.values.title}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={Boolean(formik.errors.title && formik.touched.title)}
-            />
-          </Box>
+        {/* <Typography variant="h2">Create a new post</Typography> */}
+        {/* <Box sx={formBackground}> */}
+        <Box sx={inputRow}>
+          <InputLabel htmlFor="title">Title</InputLabel>
+          <TextField
+            sx={textField}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            id="title"
+            name="title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={Boolean(formik.errors.title && formik.touched.title)}
+          />
+          {/* </Box> */}
           <Box sx={inputRow}>
             <InputLabel htmlFor="content">Content</InputLabel>
             <TextField
@@ -82,15 +81,15 @@ const buttonContainer = {
   justifyContent: "flex-end",
 };
 
-const formBackground = {
-  display: "flex",
-  flexDirection: "column",
-  width: "80%",
-  backgroundColor: theme.palette.secondary.main,
-  padding: "1rem 2rem",
-  borderRadius: "35px",
-  margin: "1rem",
-};
+// const formBackground = {
+//   display: "flex",
+//   flexDirection: "column",
+//   width: "80%",
+//   backgroundColor: theme.palette.secondary.main,
+//   padding: "1rem 2rem",
+//   borderRadius: "35px",
+//   margin: "1rem",
+// };
 
 const inputRow = {
   display: "flex",
