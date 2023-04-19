@@ -2,13 +2,27 @@ import express from 'express';
 import 'express-async-errors';
 import UserModel from './user-model';
 
-const userRouter = express
-.Router()
-.get("/api/posts", async (req, res) => {
-  const posts = await UserModel.find({})
-  res.json(posts);
+const userRouter = express.Router()
+
+//Hämta alla användare
+.get("/api/users", async (req, res) => {
+  const users = await UserModel.find({})
+  res.json(users);
 })
-.post("/api/posts", async (req, res) => {
+
+
+//Registrera ny användare
+.post("/api/register", async (req, res) => {
+  const { username, password } = req.body;
+  const existingUser = await UserModel.findOne({ username });
+
+  if (existingUser) {
+    return res.status(400).json({ message: 'Username already taken' });
+  }
+
+  
+
+
   const post = await UserModel.create(req.body);
   res.json(post);
 });

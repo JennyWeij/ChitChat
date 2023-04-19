@@ -1,8 +1,11 @@
-import { InferSchemaType, Schema, model } from "mongoose";
+import argon2 from 'argon2';
+import { CallbackError, InferSchemaType, Schema, model } from "mongoose";
 
-const postSchema = new Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
+
+const userSchema = new Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true, default: "user" },
 },
 {
   versionKey: false,
@@ -10,8 +13,20 @@ const postSchema = new Schema({
 }
 );
 
+userSchema.pre('save', async function (next) {
+  try {
+    if (this.isModified('password')) {
+      this.password = await argon2.hash(this.password);
+    }
+    next();
+  } catch (error) {
+    const typedError = error as CallbackError;
+    next(typedError);
+  }
+});
+
 export type User = InferSchemaType<typeof userSchema>;
 
-const UserModel = model("user", userSchema);
+const UserModel = model("User", userSchema);
 
 export default UserModel;

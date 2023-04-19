@@ -5,9 +5,9 @@ import { app } from './app';
 import express from 'express';
 import 'express-async-errors';
 import mongoose from 'mongoose';
-import postRouter from './resources/post/post-router';
+import postRouter from '../resources/posts/post-router';
 
-const app = express();
+//const app = express();
 
 // Global middlewares
 app.use(express.json());
@@ -25,7 +25,7 @@ async function main() {
   console.log("Connected to Database");
 
   app.listen(3000, () => {
-    console.log("server is running: http://localhost.3000");
+    console.log("server is running: http://localhost:3000");
   })
 
 }
