@@ -57,10 +57,9 @@ export let theme: Theme = createTheme({
     },
     lightgrey: {
       main: "#d3d3d3",
-
+    },
     white: {
       main: "#FFFFFF",
-
     },
   },
   components: {
@@ -68,7 +67,6 @@ export let theme: Theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
-
         },
       },
     },
@@ -160,7 +158,6 @@ export let themeAdmin: Theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
-
         },
       },
     },
