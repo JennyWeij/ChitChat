@@ -1,4 +1,5 @@
 import { Box, TextField, Typography } from "@mui/material";
+import TestForm from "../components/TestForm";
 import TextButton from "../components/TextButton";
 import { theme } from "../theme";
 
@@ -115,6 +116,9 @@ export default function SignupPage() {
 
         <TextButton mode="light">Register</TextButton>
       </Box>
+      <TestForm />
     </Box>
   );
 }
+
+
