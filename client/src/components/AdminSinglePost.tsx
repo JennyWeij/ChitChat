@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { themeAdmin } from "../theme";
-import AlertDialog from "./AlertDialog";
-import EditDialogAdmin from "./EditDialogAdmin";
+import EditDeleteButtons from "./EditDeleteButtons";
 
 interface Props {
   name: string;
@@ -36,10 +35,7 @@ export default function AdminSinglePost({ name, timestamp, content }: Props) {
             </Box>
           </CardContent>
         </Card>
-        <Box sx={editDelete}>
-          <EditDialogAdmin />
-          <AlertDialog />
-        </Box>
+        <EditDeleteButtons />
       </Box>
     </ThemeProvider>
   );
@@ -86,20 +82,6 @@ const timeStyling = {
 const contentStyle = {
   "@media (max-width: 600px)": {
     width: "100%",
-  },
-};
-
-const editDelete = {
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  marginLeft: "0.4rem",
-  gap: "1rem",
-  marginTop: "1.5rem",
-  color: themeAdmin.palette.darktext.main,
-  "@media (max-width: 600px)": {
-    flexDirection: "row",
-    marginTop: "0.5rem",
   },
 };
 
