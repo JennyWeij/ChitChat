@@ -8,8 +8,8 @@ export default function StartPage() {
   return (
     <Box>
       <Box sx={buttonContainer}>
-        <TextButton mode="light">Log In</TextButton>
-        <TextButton mode="dark">Create Account</TextButton>
+        <TextButton to="/login" mode="light">Log In</TextButton>
+        <TextButton to="/signup" mode="dark">Create Account</TextButton>
       </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Latest posts</Typography>
