@@ -16,7 +16,7 @@ export default function SignupPage() {
         <Typography variant="h2">Register new user</Typography>
         <Box
           sx={{
-            width: { xs: "20rem", sm: "25rem", md: "27rem", lg: "32rem" },
+            width: { xs: "20rem", sm: "25rem", md: "30rem", lg: "32rem" },
             height: "13rem",
             marginTop: "2rem",
             marginBottom: "2.5rem",
@@ -45,6 +45,12 @@ export default function SignupPage() {
                 md: "1.5rem",
                 lg: "3rem",
               },
+              marginTop: {
+                xs: "0rem",
+                sm: "0rem",
+                md: "2rem",
+                lg: "2rem",
+              },
               gridRow: { xs: "1", sm: "1" },
             }}
           >
@@ -58,10 +64,16 @@ export default function SignupPage() {
               gridColumn: { xs: "1", sm: "1", md: "2" },
               gridRow: { xs: "2", sm: "2", md: "1" },
               marginRight: "1rem",
+              marginTop: {
+                xs: "0rem",
+                sm: "0rem",
+                md: "2rem",
+                lg: "2rem",
+              },
               marginLeft: {
                 xs: "3rem",
                 sm: "5.5rem",
-                md: "0.5rem",
+                md: "1.5rem",
                 lg: "0.5rem",
               },
             }}
@@ -77,7 +89,7 @@ export default function SignupPage() {
                 lg: "3rem",
               },
               gridRow: { xs: "3", sm: "3" },
-              marginBottom: { xs: "0rem", sm: "0rem", md: "1rem", lg: "1rem" },
+              marginBottom: { xs: "0rem", sm: "0rem", md: "2rem", lg: "2rem" },
             }}
           >
             Create password
@@ -90,11 +102,11 @@ export default function SignupPage() {
               gridColumn: { xs: "1", sm: "1", md: "2" },
               gridRow: { xs: "4", sm: "4", md: "3" },
               marginRight: "1rem",
-              marginBottom: "1rem",
+              marginBottom: { xs: "1rem", sm: "1rem", md: "2rem", lg: "2rem" },
               marginLeft: {
                 xs: "3rem",
                 sm: "5.5rem",
-                md: "0.5rem",
+                md: "1.5rem",
                 lg: "0.5rem",
               },
             }}
