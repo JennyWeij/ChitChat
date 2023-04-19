@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import "./index.css";
+import Admin from "./pages/Admin";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import StartPage from "./pages/Start";
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<StartPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/admin" element={<Admin />} />
     </Route>
   )
 );
