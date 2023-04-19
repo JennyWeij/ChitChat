@@ -56,7 +56,13 @@ export default function LoginPage() {
             variant="h4"
             gridColumn="1"
             sx={{
-              marginLeft: { xs: "7rem", sm: "1rem", md: "3rem", lg: "4rem" },
+              marginLeft: {
+                xs: "7rem",
+                sm: "1.5rem",
+                md: "3.5rem",
+                lg: "4.5rem",
+              },
+              marginBottom: { xs: "0rem", sm: "1rem", md: "1rem", lg: "1rem" },
               gridRow: { xs: "3", sm: "2" },
             }}
           >
