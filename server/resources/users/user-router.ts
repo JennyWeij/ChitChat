@@ -1,8 +1,6 @@
 import argon2 from 'argon2';
 import express from 'express';
-import 'express-async-errors';
 import { UserModel } from './user-model';
-//import UserModel from './user-model';
 
 const userRouter = express.Router()
 
@@ -14,21 +12,22 @@ const userRouter = express.Router()
 
 
 //Registrera ny användare
-.post("/api/register", async (req, res) => {
+.post("/api/users/register", async (req, res) => {
   const { username, password } = req.body;
+  // const userInfo = joiSchema.validate(req.body);
+  
   const existingUser = await UserModel.findOne({ username });
 
   if (existingUser) {
     return res.status(400).json({ message: 'Username already taken' });
   }
-
   
   const user = await UserModel.create(req.body);
   res.status(201).json(user);
 })
 
 //Logga in (ej klar)
-.post("/api/login", async (req, res) => {
+.post("/api/users/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await UserModel.findOne({ username });
 
@@ -46,8 +45,14 @@ const userRouter = express.Router()
 
   res.status(200).json({ message: 'Login successful', user})
 
-  //spara inloggade användare?
-  //logga ut ordentligt, inte bara i kontexten
+  
+  //TODO
+  //spara inloggade användare (session, cookie)
+  //logga ut ordentligt, inte bara i kontexten (delete)
+  //skicka id till kontexten
+  //skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
+  //skicka ej med isAdmin, validera 
+
 
 })
 
