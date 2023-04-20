@@ -33,6 +33,8 @@ export default function SignupPage() {
 
         <TextButton mode="light">Register</TextButton>
       </Box>
+
+      {/* Jenny testform */}
       <TestForm />
     </Box>
   );
