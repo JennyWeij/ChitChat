@@ -27,6 +27,7 @@ const userRouter = express.Router()
   res.status(201).json(user);
 })
 
+//Logga in (ej klar)
 .post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await UserModel.findOne({ username });
@@ -44,6 +45,9 @@ const userRouter = express.Router()
   }
 
   res.status(200).json({ message: 'Login successful', user})
+
+  //spara inloggade användare?
+  //logga ut ordentligt, inte bara i kontexten
 
 })
 
