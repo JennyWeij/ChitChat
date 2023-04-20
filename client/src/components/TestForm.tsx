@@ -26,7 +26,7 @@ export default function TestForm() {
       };
 
       async function register(username: string, password: string) {
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

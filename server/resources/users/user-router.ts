@@ -1,6 +1,6 @@
-import argon2 from 'argon2';
 import express from 'express';
-import { UserModel } from './user-model';
+import { UserModel } from '../../src';
+import { loginUser, registerUser } from './user-controller';
 
 const userRouter = express.Router()
 
@@ -10,50 +10,17 @@ const userRouter = express.Router()
   res.json(users);
 })
 
-
 //Registrera ny användare
-.post("/api/users/register", async (req, res) => {
-  const { username, password } = req.body;
-  // const userInfo = joiSchema.validate(req.body);
-  
-  const existingUser = await UserModel.findOne({ username });
-
-  if (existingUser) {
-    return res.status(400).json({ message: 'Username already taken' });
-  }
-  
-  const user = await UserModel.create(req.body);
-  res.status(201).json(user);
-})
+.post("/api/users/register", registerUser)
 
 //Logga in (ej klar)
-.post("/api/users/login", async (req, res) => {
-  const { username, password } = req.body;
-  const user = await UserModel.findOne({ username });
+.post("/api/users/login", loginUser)
 
-  if (!user) {
-    res.status(400).json({ message: 'Invalid username or password' });
-    return;
-  }
-
-  const isPasswordValid = await argon2.verify(user.password, password);
-
-  if (!isPasswordValid) {
-    res.status(400).json({ message: 'Invalid username or password' });
-    return;
-  }
-
-  res.status(200).json({ message: 'Login successful', user})
-
-  
-  //TODO
-  //spara inloggade användare (session, cookie)
-  //logga ut ordentligt, inte bara i kontexten (delete)
-  //skicka id till kontexten
-  //skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
-  //skicka ej med isAdmin, validera 
-
-
-})
+//TODO
+//spara inloggade användare (session, cookie)
+//logga ut ordentligt, inte bara i kontexten (delete)
+//skicka id till kontexten
+//skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
+//skicka ej med isAdmin, validera 
 
 export default userRouter;

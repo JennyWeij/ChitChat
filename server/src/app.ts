@@ -1,3 +1,4 @@
+import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
 import userRouter from '../resources/users/user-router';
@@ -9,24 +10,34 @@ export const app = express();
 
 // Global middlewares
 
-// //blocked by CORS policy (solution)
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-//   );
-//   if (req.method === 'OPTIONS') {
-//     res.header(
-//       'Access-Control-Allow-Methods',
-//       'PUT, POST, PATCH, DELETE, GET'
-//     );
-//     return res.status(200).json({});
-//   }
-//   next();
-// });
+//blocked by CORS policy (solution)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  if (req.method === 'OPTIONS') {
+    res.header(
+      'Access-Control-Allow-Methods',
+      'PUT, POST, PATCH, DELETE, GET'
+    );
+    return res.status(200).json({});
+  }
+  next();
+});
 
 app.use(express.json());
+
+app.use(
+  cookieSession({
+    name: 'login',
+    secure: false,
+    httpOnly: true,
+    secret: 's98d7asyudbahs8d97a6digas78d866usdfss',
+    maxAge: 1000 * 20,
+  })
+);
 
 // add routers
 //app.use(postRouter);
