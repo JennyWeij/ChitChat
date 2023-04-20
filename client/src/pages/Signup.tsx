@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
 import SignupForm from "../components/SignupForm";
 
 export default function SignupPage() {
-  return <SignupForm />;
+  return (
+    <Box>
+      <SignupForm />
+    </Box>
+  );
 }
