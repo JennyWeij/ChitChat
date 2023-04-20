@@ -9,50 +9,50 @@ export async function registerUser(req: Request, res: Response) {
   const existingUser = await UserModel.findOne({ username });
 
   if (existingUser) {
-    return res.status(400).json({ message: "Username already taken" });
+    return res.status(409).json("Username already taken");
   }
 
-  const user = await UserModel.create(req.body);
-  res.status(201).json(user);
+  const user = await UserModel.create({
+    username,
+    password,
+  });
+
+  const { password: _, ...userWithoutPassword } = user.toObject();
+
+  res.status(201).json(userWithoutPassword);
 }
 
 export async function loginUser(req: Request, res: Response) {
   const { username, password } = req.body;
-  console.log(
-    "Received login request with username:",
-    username,
-    "and password:",
-    password
-  );
 
   const user = await UserModel.findOne({ username });
   if (!user) {
-    res.status(400).json({ message: "Invalid username or password" });
+    res.status(401).json({ message: "Invalid username or password" });
     return;
   }
-  console.log("Found user in the database:", user);
 
   const isPasswordValid = await argon2.verify(user.password, password);
   if (!isPasswordValid) {
-    res.status(400).json({ message: "Invalid username or password" });
+    res.status(401).json({ message: "Invalid username or password" });
     return;
   }
-  console.log('Password verification result:', isPasswordValid);
 
-  const { password: _, ...userWithoutPassword } = user.toObject();
+  const { password: _, ...userWithoutPassword } = user;
 
   req.session!.user = userWithoutPassword;
 
-  res
-    .status(200)
-    .json({ message: "Login successful", user: userWithoutPassword });
+  res.status(200).json({
+    _id: user._id,
+    message: "Login successful",
+    user: userWithoutPassword,
+  });
 }
 
 export function logoutUser(req: Request, res: Response) {
   if (req.session) {
     req.session = null;
   }
-  res.status(200).json({ message: "Logged out" });
+  res.status(204).json({ message: "Logged out" });
 }
 
 export async function getSession(req: Request, res: Response) {

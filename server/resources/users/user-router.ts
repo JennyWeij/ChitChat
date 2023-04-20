@@ -23,10 +23,10 @@ const userRouter = express.Router()
 .get("/api/users/session", getSession)
 
 //TODO
-//spara inloggade användare (session, cookie) check.
-//logga ut ordentligt, inte bara i kontexten (delete)
-//skicka id till kontexten
-//skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod) check.
+//x spara inloggade användare (session, cookie) 
+//x logga ut ordentligt, inte bara i kontexten (delete)
+//ta emot id i kontexten?
+//x skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
 //skicka ej med isAdmin, validera 
 
 export default userRouter;
