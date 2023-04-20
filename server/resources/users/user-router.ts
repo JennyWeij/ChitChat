@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserModel } from '../../src';
-import { loginUser, registerUser } from './user-controller';
+import { getSession, loginUser, logoutUser, registerUser } from './user-controller';
 
 const userRouter = express.Router()
 
@@ -16,11 +16,17 @@ const userRouter = express.Router()
 //Logga in (ej klar)
 .post("/api/users/login", loginUser)
 
+//Logga ut
+.delete("/api/users/logout", logoutUser)
+
+//Hämta kaka
+.get("/api/users/session", getSession)
+
 //TODO
-//spara inloggade användare (session, cookie)
+//spara inloggade användare (session, cookie) check.
 //logga ut ordentligt, inte bara i kontexten (delete)
 //skicka id till kontexten
-//skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
+//skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod) check.
 //skicka ej med isAdmin, validera 
 
 export default userRouter;
