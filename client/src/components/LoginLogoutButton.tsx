@@ -7,14 +7,16 @@ export default function LoginLogoutButton() {
   const handleClick = () => {
     if (isLoggedIn) {
       logout();
-    } else {
-      login();
-    }
+    } 
   };
 
   return (
-    <TextButton mode="light" onClick={handleClick}>
-      {isLoggedIn ? 'Logout' : 'Login'}
-    </TextButton>
+    <>
+    {isLoggedIn && (
+      <TextButton mode="light" onClick={handleClick}>
+        Logout
+      </TextButton>
+    )}
+  </>
   );
 }

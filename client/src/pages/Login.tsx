@@ -1,4 +1,5 @@
 import { Box, TextField, Typography } from "@mui/material";
+import TestFormLogin from "../components/TestFormLogin";
 import TextButton from "../components/TextButton";
 import { theme } from "../theme";
 
@@ -84,6 +85,7 @@ export default function LoginPage() {
 
         <TextButton mode="light">Log in</TextButton>
       </Box>
+      <TestFormLogin/>
     </Box>
   );
 }

@@ -27,6 +27,6 @@ userSchema.pre('save', async function (next) {
 
 export type User = InferSchemaType<typeof userSchema>;
 
-const UserModel = model("User", userSchema);
+export const UserModel = model("User", userSchema);
 
-export default UserModel;
+//export default UserModel;
