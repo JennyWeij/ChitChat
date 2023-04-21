@@ -40,25 +40,24 @@ export async function loginUser(req: Request, res: Response) {
 
   const user = await UserModel.findOne({ username });
   if (!user) {
-    res.status(401).json({ message: "Invalid username or password" });
+    res.status(401).json("Invalid username or password" );
     return;
   }
 
   const isPasswordValid = await argon2.verify(user.password, password);
   if (!isPasswordValid) {
-    res.status(401).json({ message: "Invalid username or password" });
+    res.status(401).json("Invalid username or password");
     return;
   }
 
-  const { password: _, ...userWithoutPassword } = user;
+  const { password: _, ...userWithoutPassword } = user.toObject();
   console.log(userWithoutPassword);
 
   req.session!.user = userWithoutPassword;
 
   res.status(200).json({
-    _id: user._id,
     message: "Login successful",
-    user: userWithoutPassword,
+    ...userWithoutPassword,
   });
 }
 

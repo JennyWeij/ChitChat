@@ -16,8 +16,9 @@ const userRouter = express.Router()
 //Logga in (ej klar)
 .post("/api/users/login", loginUser)
 
-//Logga ut
-.delete("/api/users/logout", logoutUser)
+//Logga ut (Bör nog vara .delete men testet vill inte)
+//.delete("/api/users/logout", logoutUser)
+.post("/api/users/logout", logoutUser)
 
 //Hämta kaka
 .get("/api/users/session", getSession)
