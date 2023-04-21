@@ -1,10 +1,22 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { posts } from "../../data";
 
 import AdminSinglePost from "../components/AdminSinglePost";
 import { themeAdmin } from "../theme";
 
 export default function AdminPage() {
+  useEffect(() => {
+    // Change document.body background color to a linear gradient
+    document.body.style.background =
+      "linear-gradient(to bottom, #E1EEFA, #FFFFFF)";
+
+    // Cleanup function to revert the change when the component unmounts
+    return () => {
+      document.body.style.background = "";
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={themeAdmin}>
       <Box sx={{ textAlign: "center" }}>
