@@ -24,3 +24,18 @@ DELETE http://localhost:3000/api/users/logout
 
 ### Get session
 GET http://localhost:3000/api/users/session
+
+
+### Post new post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "this is a title",
+  "content": "this is some content",
+  "author": "6442722e2ebf8075665e98ea"
+}
+
+### Get all posts
+
+GET http://localhost:3000/api/posts
