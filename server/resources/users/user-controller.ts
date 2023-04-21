@@ -1,10 +1,16 @@
 import argon2 from "argon2";
 import { Request, Response } from "express";
+import * as Yup from 'yup';
 import { UserModel } from "./user-model";
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required(),
+  password: Yup.string().required().min(6),
+})
 
 export async function registerUser(req: Request, res: Response) {
   const { username, password } = req.body;
-  // const userInfo = joiSchema.validate(req.body);
+  //const userInfo = validationSchema.validate(req.body);
 
   const existingUser = await UserModel.findOne({ username });
 
