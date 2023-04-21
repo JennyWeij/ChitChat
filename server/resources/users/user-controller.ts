@@ -1,31 +1,38 @@
 import argon2 from "argon2";
 import { Request, Response } from "express";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import { UserModel } from "./user-model";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required().min(6),
-})
+});
 
 export async function registerUser(req: Request, res: Response) {
-  const { username, password } = req.body;
-  //const userInfo = validationSchema.validate(req.body);
+  try {
+    const validatedData = await validationSchema.validate(req.body);
+    const { username, password } = validatedData;
 
-  const existingUser = await UserModel.findOne({ username });
+    const existingUser = await UserModel.findOne({ username });
 
-  if (existingUser) {
-    return res.status(409).json("Username already taken");
+    if (existingUser) {
+      return res.status(409).json("Username already taken");
+    }
+
+    const user = await UserModel.create({
+      username,
+      password,
+    });
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    res.status(201).json(userWithoutPassword);
+  } catch (error) {
+    if (error instanceof Yup.ValidationError) {
+      return res.status(400).json(error.message);
+    }
+    return res.status(400).json("An error occurred while registering the user");
   }
-
-  const user = await UserModel.create({
-    username,
-    password,
-  });
-
-  const { password: _, ...userWithoutPassword } = user.toObject();
-
-  res.status(201).json(userWithoutPassword);
 }
 
 export async function loginUser(req: Request, res: Response) {
@@ -44,6 +51,7 @@ export async function loginUser(req: Request, res: Response) {
   }
 
   const { password: _, ...userWithoutPassword } = user;
+  console.log(userWithoutPassword);
 
   req.session!.user = userWithoutPassword;
 
