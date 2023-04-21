@@ -27,7 +27,7 @@ export default function SignupForm() {
   };
 
   async function register(username: string, password: string) {
-    const response = await fetch("http://localhost:3000/api/register", {
+    const response = await fetch("/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

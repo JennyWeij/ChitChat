@@ -1,8 +1,6 @@
-import argon2 from 'argon2';
 import express from 'express';
-import 'express-async-errors';
-import { UserModel } from './user-model';
-//import UserModel from './user-model';
+import { UserModel } from '../../src';
+import { getSession, loginUser, logoutUser, registerUser } from './user-controller';
 
 const userRouter = express.Router()
 
@@ -12,43 +10,23 @@ const userRouter = express.Router()
   res.json(users);
 })
 
-
 //Registrera ny användare
-.post("/api/register", async (req, res) => {
-  const { username, password } = req.body;
-  const existingUser = await UserModel.findOne({ username });
-
-  if (existingUser) {
-    return res.status(400).json({ message: 'Username already taken' });
-  }
-
-  
-  const user = await UserModel.create(req.body);
-  res.status(201).json(user);
-})
+.post("/api/users/register", registerUser)
 
 //Logga in (ej klar)
-.post("/api/login", async (req, res) => {
-  const { username, password } = req.body;
-  const user = await UserModel.findOne({ username });
+.post("/api/users/login", loginUser)
 
-  if (!user) {
-    res.status(400).json({ message: 'Invalid username or password' });
-    return;
-  }
+//Logga ut
+.delete("/api/users/logout", logoutUser)
 
-  const isPasswordValid = await argon2.verify(user.password, password);
+//Hämta kaka
+.get("/api/users/session", getSession)
 
-  if (!isPasswordValid) {
-    res.status(400).json({ message: 'Invalid username or password' });
-    return;
-  }
-
-  res.status(200).json({ message: 'Login successful', user})
-
-  //spara inloggade användare?
-  //logga ut ordentligt, inte bara i kontexten
-
-})
+//TODO
+//x spara inloggade användare (session, cookie) 
+//x logga ut ordentligt, inte bara i kontexten (delete)
+//ta emot id i kontexten?
+//x skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
+//skicka ej med isAdmin, validera 
 
 export default userRouter;
