@@ -32,7 +32,7 @@ export default function AuthProvider({ children }: Props) {
 
   const getSession = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/users/session", {
+      const response = await fetch("/api/users/session", {
         method: "GET",
         credentials: "include",
       });
@@ -53,7 +53,7 @@ export default function AuthProvider({ children }: Props) {
     username: string,
     password: string
   ): Promise<boolean> => {
-    const response = await fetch("http://localhost:3000/api/users/login", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function AuthProvider({ children }: Props) {
   };
 
   const logout = async () => {
-    const response = await fetch("http://localhost:3000/api/users/logout", {
+    const response = await fetch("/api/users/logout", {
       method: "DELETE",
       credentials: "include",
     });
