@@ -3,10 +3,4 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-  background: rgb(220, 239, 211);
-  background: linear-gradient(
-    180deg,
-    rgba(220, 239, 211, 1) 0%,
-    rgb(255, 255, 255) 100%
-  );
 }
