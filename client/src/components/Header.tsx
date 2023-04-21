@@ -1,19 +1,18 @@
 import { AppBar, Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import LoginLogoutButton from "./LoginLogoutButton";
 
 export default function Header() {
-
   return (
     <AppBar sx={headerBoxStyling}>
       <Box sx={buttonWrapperStyling}></Box>
-      <Typography
-        variant="h1"
-        sx={logoStyling}
-      >
-        ChitChat
-      </Typography>
+      <Link to="/" style={linkStyle}>
+        <Typography variant="h1" sx={logoStyling}>
+          ChitChat
+        </Typography>
+      </Link>
       <Box sx={buttonWrapperStyling}>
-      <LoginLogoutButton />
+        <LoginLogoutButton />
       </Box>
     </AppBar>
   );
@@ -35,4 +34,8 @@ const logoStyling = {
 
 const buttonWrapperStyling = {
   width: "95px",
-}
+};
+
+const linkStyle = {
+  textDecoration: "none",
+};

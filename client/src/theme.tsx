@@ -55,9 +55,6 @@ export let theme: Theme = createTheme({
     black: {
       main: "#000000",
     },
-    lightgrey: {
-      main: "#d3d3d3",
-    },
     white: {
       main: "#FFFFFF",
     },
@@ -166,6 +163,9 @@ export let themeAdmin: Theme = createTheme({
     },
     background: {
       default: "tomato", // replace with your desired background color
+    },
+    lightgrey: {
+      main: "#F2F3F4",
     },
   },
 
