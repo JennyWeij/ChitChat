@@ -1,4 +1,6 @@
-import { Box, ThemeProvider } from "@mui/material";
+import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
+import { posts } from "../../data";
+import AdminSinglePost from "../components/AdminSinglePost";
 
 import { themeAdmin } from "../theme";
 
@@ -6,7 +8,7 @@ export default function AdminPage() {
   return (
     <ThemeProvider theme={themeAdmin}>
       <Box sx={{ textAlign: "center" }}>
-        {/* <Typography sx={adminTitle}>ADMIN</Typography>
+        <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={wallContainer}>
           <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
@@ -21,7 +23,7 @@ export default function AdminPage() {
               />
             ))}
           </Box>
-        </Box> */}
+        </Box>
       </Box>
     </ThemeProvider>
   );
