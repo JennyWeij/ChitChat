@@ -1,14 +1,11 @@
 import express from 'express';
 import { UserModel } from '../../src';
+import { isAdmin } from './isAdmin';
 import { getSession, loginUser, logoutUser, registerUser } from './user-controller';
 
 const userRouter = express.Router()
 
-//Hämta alla användare
-.get("/api/users", async (req, res) => {
-  const users = await UserModel.find({})
-  res.json(users);
-})
+//-------------USER-------------//
 
 //Registrera ny användare
 .post("/api/users/register", registerUser)
@@ -28,6 +25,17 @@ const userRouter = express.Router()
 //x logga ut ordentligt, inte bara i kontexten (delete)
 //ta emot id i kontexten?
 //x skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
-//skicka ej med isAdmin, validera 
+//skicka ej med isAdmin, validera ?
+
+//-------------ADMIN-------------//
+
+//Hämta alla användare
+.get("/api/users", isAdmin, async (req, res) => {
+  const users = await UserModel.find({}).select('-password');
+  res.json(users);
+})
+
+//Ändra användarroll
+
 
 export default userRouter;
