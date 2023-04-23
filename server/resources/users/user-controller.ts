@@ -3,11 +3,14 @@ import { Request, Response } from "express";
 import * as Yup from "yup";
 import { UserModel } from "./user-model";
 
+//-------------USER-------------//
+
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required().min(6),
 });
 
+//Registrera ny användare
 export async function registerUser(req: Request, res: Response) {
   try {
     const validatedData = await validationSchema.validate(req.body);
@@ -35,12 +38,13 @@ export async function registerUser(req: Request, res: Response) {
   }
 }
 
+//Logga in (ej klar)
 export async function loginUser(req: Request, res: Response) {
   const { username, password } = req.body;
 
   const user = await UserModel.findOne({ username });
   if (!user) {
-    res.status(401).json("Invalid username or password" );
+    res.status(401).json("Invalid username or password");
     return;
   }
 
@@ -61,6 +65,7 @@ export async function loginUser(req: Request, res: Response) {
   });
 }
 
+//Logga ut
 export function logoutUser(req: Request, res: Response) {
   if (req.session) {
     req.session = null;
@@ -68,6 +73,7 @@ export function logoutUser(req: Request, res: Response) {
   res.status(204).json({ message: "Logged out" });
 }
 
+//Hämta session
 export async function getSession(req: Request, res: Response) {
   const sessionUser = req.session!.user;
 
@@ -76,5 +82,44 @@ export async function getSession(req: Request, res: Response) {
     res.status(200).json(userWithoutPassword);
   } else {
     res.status(401).json({ message: "No active session" });
+  }
+}
+
+//-------------ADMIN-------------//
+
+//Ändra användarroll
+export async function changeUserRole(req: Request, res: Response) {
+  const { id } = req.params;
+  const { isAdmin } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ _id: id });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.isAdmin = isAdmin;
+    await user.save();
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+    res.status(200).json(userWithoutPassword);
+  } catch (error) {
+    res.status(400).json({ message: "An error occurred while updating the user's role" });
+  }
+}
+
+export async function deleteUser(req: Request, res: Response) {
+  const { id } = req.params;
+
+  try {
+    const user = await UserModel.findOne({ _id: id });
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
+
+    await UserModel.deleteOne({ _id: id });
+    res.status(204).json("User deleted");
+  } catch (error) {
+    res.status(400).json("An error occurred while updating the user's role");
   }
 }

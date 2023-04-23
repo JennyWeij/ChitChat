@@ -1,7 +1,7 @@
 import express from 'express';
 import { UserModel } from '../../src';
 import { isAdmin } from './isAdmin';
-import { getSession, loginUser, logoutUser, registerUser } from './user-controller';
+import { changeUserRole, deleteUser, getSession, loginUser, logoutUser, registerUser } from './user-controller';
 
 const userRouter = express.Router()
 
@@ -17,7 +17,7 @@ const userRouter = express.Router()
 //.delete("/api/users/logout", logoutUser)
 .post("/api/users/logout", logoutUser)
 
-//Hämta kaka
+//Hämta session
 .get("/api/users/session", getSession)
 
 //TODO
@@ -36,6 +36,10 @@ const userRouter = express.Router()
 })
 
 //Ändra användarroll
+.put("/api/users/:id", isAdmin, changeUserRole)
+
+//Ta bort användare
+.delete("/api/users/:id", isAdmin, deleteUser)
 
 
 export default userRouter;
