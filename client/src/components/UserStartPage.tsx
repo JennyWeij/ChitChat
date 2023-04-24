@@ -38,7 +38,7 @@ export default function UserStartPage() {
   }, []);
 
   return (
-    <Box sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "start" }}>
       <Typography sx={{ marginTop: "2rem" }} variant="h2">
         Create a new post
       </Typography>
@@ -80,6 +80,7 @@ const dividerStyling = {
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
+  width: { xs: "18rem", sm: "28rem", md: "30rem", lg: "32rem" },
   gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
   padding: "2rem 6rem",
