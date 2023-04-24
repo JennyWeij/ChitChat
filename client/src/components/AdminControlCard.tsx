@@ -4,7 +4,7 @@ import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ClearIcon from "@mui/icons-material/Clear";
 import PersonIcon from "@mui/icons-material/Person";
 import { Box, Typography } from "@mui/material";
-import { theme } from "../theme";
+import { theme, themeAdmin } from "../theme";
 
 interface Props {
   name: string;
@@ -77,7 +77,7 @@ const panelContainer = {
 };
 
 const panel = {
-  backgroundColor: theme.palette.lightgrey.main,
+  backgroundColor: themeAdmin.palette.lightgrey.main,
   display: "flex",
   justifyContent: "space-between",
   p: "0.5rem",

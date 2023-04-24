@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { useUsers } from "../hooks/useUsers";
+import { themeAdmin } from "../theme";
 import AdminControlCard from "./AdminControlCard";
 
 export default function AdminControlPanel() {
@@ -66,6 +67,8 @@ export default function AdminControlPanel() {
           Admin
         </Typography>
       </Box>
+      <Typography sx={underTitel}>All Users</Typography>
+      <Divider sx={dividerStyling} />
 
       {/* Admin user */}
       {adminUsers.map((user, index) => (
@@ -93,3 +96,29 @@ export default function AdminControlPanel() {
     </Box>
   );
 }
+
+const container = {
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
+const adminTitle = {
+  fontWeight: "bold",
+  fontSize: "2rem",
+  color: themeAdmin.palette.darktext.main,
+  marginBottom: "2rem",
+};
+
+const dividerStyling = {
+  backgroundColor: themeAdmin.palette.mediumtext.main,
+  width: "80%",
+  margin: "1rem",
+};
+
+const underTitel = {
+  // variant: "h2",
+  fontSize: "h2",
+  color: themeAdmin.palette.darktext.main,
+};
