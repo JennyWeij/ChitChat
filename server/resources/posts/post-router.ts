@@ -57,4 +57,30 @@ postRouter.delete("/api/posts/:id", async (req, res) => {
   }
 });
 
+postRouter.put("/api/posts/:id", async (req: Request, res: Response) => {
+  if (!req.session || !req.session.user || !req.session.user._id) {
+    return res
+      .status(401)
+      .json(
+        JSON.stringify({ message: "You must be logged in to update a post" })
+      );
+  }
+  try {
+    const post = await PostModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      { new: true }
+    );
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.json(post);
+  } catch (err) {
+    res.status(500).json(JSON.stringify({ message: "Could not update post" }));
+  }
+});
+
 export default postRouter;
