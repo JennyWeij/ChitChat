@@ -49,6 +49,7 @@ const dividerStyling = {
 };
 
 const underTitel = {
-  variant: "h2",
+  // variant: "h2",
+  fontSize: "h2",
   color: themeAdmin.palette.darktext.main,
 };
