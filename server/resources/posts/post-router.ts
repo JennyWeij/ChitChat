@@ -1,5 +1,11 @@
 import express, { Request, Response } from "express";
+import * as yup from "yup";
 import PostModel from "./post-model";
+
+const postSchema = yup.object({
+  title: yup.string().required(),
+  content: yup.string().required(),
+});
 
 const postRouter = express.Router();
 
@@ -12,7 +18,7 @@ postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
   try {
     const post = await PostModel.findById(req.params.id);
     if (!post) {
-      return res.status(404).json("Post not found");
+      return res.status(404).json({ message: `Post ${req.params.id} not found` });
     }
     res.json(post);
   } catch (err) {
