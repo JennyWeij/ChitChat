@@ -9,9 +9,13 @@ import { theme } from "../theme";
 interface Props {
   name: string;
   isAdmin: boolean;
+  userId: string;
+  promoteUser: (userId: string) => Promise<void>;
+  deleteUser: (userId: string) => Promise<void>;
 }
 
-export default function AdminControlCard({ name, isAdmin }: Props) {
+export default function AdminControlCard({ name, isAdmin, userId, promoteUser, deleteUser }: Props) {
+
   return (
     <Box sx={panelContainer}>
       <Box sx={panel}>
@@ -49,11 +53,13 @@ export default function AdminControlCard({ name, isAdmin }: Props) {
             <ArrowCircleUpIcon
               color="info"
               fontSize="large"
+              onClick={() => promoteUser(userId)}
             />
           )}
           <ClearIcon
             color="info"
             fontSize="large"
+            onClick={() => deleteUser(userId)}
           />
         </Box>
       </Box>

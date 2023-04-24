@@ -2,10 +2,10 @@ import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { posts } from "../../data";
 
-import AdminSinglePost from "../components/AdminSinglePost";
 import { themeAdmin } from "../theme";
+import AdminSinglePost from "./AdminSinglePost";
 
-export default function AdminPage() {
+export default function AdminStartPage() {
   useEffect(() => {
     // Change document.body background color to a linear gradient
     document.body.style.background =
