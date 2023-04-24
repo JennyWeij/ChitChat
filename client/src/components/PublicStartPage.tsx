@@ -1,6 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-// import { posts } from "../../data";
 import { theme } from "../theme";
 import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";

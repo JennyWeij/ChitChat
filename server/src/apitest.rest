@@ -18,7 +18,7 @@ Content-Type: application/json
   "username": "testuser",
   "password": "testpassword"
 }
-
+  
 ### Logout user
 DELETE http://localhost:3000/api/users/logout
 
@@ -40,6 +40,5 @@ Content-Type: application/json
 
 GET http://localhost:3000/api/posts
 
-{
-  
-}
+### Delete a post
+DELETE  http://localhost:3000/api/posts/:id

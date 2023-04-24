@@ -26,4 +26,23 @@ postRouter.post("/api/posts", async (req: Request, res: Response) => {
   }
 });
 
+postRouter.delete("/api/posts/:id", async (req, res) => {
+  if (!req.session || !req.session.user || !req.session.user._id) {
+    return res
+      .status(401)
+      .json(
+        JSON.stringify({ message: "You must be logged in to delete a post" })
+      );
+  }
+  try {
+    const post = await PostModel.findByIdAndDelete(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(204).json({ message: "Post deleted successfully" });
+  } catch (err) {
+    res.status(500).json(JSON.stringify({ message: "Could not delete post" }));
+  }
+});
+
 export default postRouter;
