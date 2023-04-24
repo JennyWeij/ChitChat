@@ -1,14 +1,42 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { posts } from "../../data";
+import { useEffect, useState } from "react";
+// import { Post } from "../../data";
+// import { Post, posts } from "../../data";
 import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
+
+interface Post {
+  _id: string;
+  author: string;
+  createdAt: string;
+  title: string;
+  content: string;
+}
 
 function handleCreatePost(values: { content: string }) {
   console.log(values);
 }
 
 export default function UserStartPage() {
+  const [data, setData] = useState<Post[]>([]);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data: Post[]) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography sx={{ marginTop: "2rem" }} variant="h2">
@@ -21,11 +49,11 @@ export default function UserStartPage() {
         <Typography variant="h2">Lastest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
-          {posts.map((post, index) => (
+          {data.map((post) => (
             <SinglePostCard
-              key={index}
-              name={post.name}
-              timestamp={post.timestamp}
+              key={post._id}
+              name={post.author}
+              timestamp={post.createdAt}
               title={post.title}
               content={post.content}
             />
