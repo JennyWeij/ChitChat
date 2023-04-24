@@ -29,9 +29,9 @@ export default function SinglePostCard({
           <Box sx={cardHeader}>
             <Box sx={nameAndIcon}>
               <PersonOutline sx={iconStyling} />
-              <Typography variant="h5">{name}</Typography>
+              <Typography variant="h5">Namn</Typography>
             </Box>
-            <Typography sx={timeStyling}>{timestamp}</Typography>
+            <Typography sx={timeStyling}>tid</Typography>
           </Box>
           <Divider sx={dividerStyling} />
           <Typography

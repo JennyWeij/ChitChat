@@ -12,16 +12,6 @@ const postSchema = new Schema(
   }
 );
 
-// Add a reference to the user schema
-postSchema.set("toObject", { virtuals: true });
-postSchema.set("toJSON", { virtuals: true });
-postSchema.virtual("user", {
-  ref: "User",
-  localField: "author",
-  foreignField: "_id",
-  justOne: true,
-});
-
 export type Post = InferSchemaType<typeof postSchema>;
 
 export const PostModel = model<Post>("Post", postSchema);
