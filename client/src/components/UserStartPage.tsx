@@ -46,7 +46,7 @@ export default function UserStartPage() {
         <CreatePostForm onSubmit={handleCreatePost} />
       </Box>
       <Box sx={wallContainer}>
-        <Typography variant="h2">Lastest posts</Typography>
+        <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
           {data.map((post) => (
