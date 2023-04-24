@@ -1,10 +1,54 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
-import { posts } from "../../data";
+
+
 import AdminSinglePost from "../components/AdminSinglePost";
+
+
+import { useEffect, useState } from "react";
+// import { posts } from "../../data";
+
+//import SinglePostCard from "../components/SinglePostCard";
 
 import { themeAdmin } from "../theme";
 
+interface Post {
+  _id: string;
+  author: string;
+  createdAt: string;
+  title: string;
+  content: string;
+}
+
 export default function AdminPage() {
+  const [data, setData] = useState<Post[]>([]);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data: Post[]) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Change document.body background color to a linear gradient
+    document.body.style.background =
+      "linear-gradient(to bottom, #E1EEFA, #FFFFFF)";
+
+    // Cleanup function to revert the change when the component unmounts
+    return () => {
+      document.body.style.background = "";
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={themeAdmin}>
       <Box sx={{ textAlign: "center" }}>
@@ -13,11 +57,11 @@ export default function AdminPage() {
           <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
           <Box sx={wallBackground}>
-            {posts.map((post, index) => (
-              <AdminSinglePost
-                key={index}
-                name={post.name}
-                timestamp={post.timestamp}
+            {data.map((post) => (
+              <SinglePostCard
+                key={post._id}
+                name={post.author}
+                timestamp={post.createdAt}
                 title={post.title}
                 content={post.content}
               />

@@ -1,10 +1,36 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { posts } from "../../data";
+import { useEffect, useState } from "react";
 import { theme } from "../theme";
 import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
 
+interface Post {
+  _id: string;
+  author: string;
+  createdAt: string;
+  title: string;
+  content: string;
+}
+
 export default function PublicStartPage() {
+  const [data, setData] = useState<Post[]>([]);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data: Post[]) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <Box>
       <Box sx={buttonContainer}>
@@ -19,11 +45,11 @@ export default function PublicStartPage() {
         <Typography variant="h2">Lastest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
-          {posts.map((post, index) => (
+          {data.map((post) => (
             <SinglePostCard
-              key={index}
-              name={post.name}
-              timestamp={post.timestamp}
+              key={post._id}
+              name={post.author}
+              timestamp={post.createdAt}
               title={post.title}
               content={post.content}
             />

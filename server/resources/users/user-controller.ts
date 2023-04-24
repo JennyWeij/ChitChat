@@ -1,25 +1,38 @@
 import argon2 from "argon2";
 import { Request, Response } from "express";
+import * as Yup from "yup";
 import { UserModel } from "./user-model";
 
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required(),
+  password: Yup.string().required().min(6),
+});
+
 export async function registerUser(req: Request, res: Response) {
-  const { username, password } = req.body;
-  // const userInfo = joiSchema.validate(req.body);
+  try {
+    const validatedData = await validationSchema.validate(req.body);
+    const { username, password } = validatedData;
 
-  const existingUser = await UserModel.findOne({ username });
+    const existingUser = await UserModel.findOne({ username });
 
-  if (existingUser) {
-    return res.status(409).json("Username already taken");
+    if (existingUser) {
+      return res.status(409).json("Username already taken");
+    }
+
+    const user = await UserModel.create({
+      username,
+      password,
+    });
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    res.status(201).json(userWithoutPassword);
+  } catch (error) {
+    if (error instanceof Yup.ValidationError) {
+      return res.status(400).json(error.message);
+    }
+    return res.status(400).json("An error occurred while registering the user");
   }
-
-  const user = await UserModel.create({
-    username,
-    password,
-  });
-
-  const { password: _, ...userWithoutPassword } = user.toObject();
-
-  res.status(201).json(userWithoutPassword);
 }
 
 export async function loginUser(req: Request, res: Response) {
@@ -27,24 +40,24 @@ export async function loginUser(req: Request, res: Response) {
 
   const user = await UserModel.findOne({ username });
   if (!user) {
-    res.status(401).json({ message: "Invalid username or password" });
+    res.status(401).json("Invalid username or password" );
     return;
   }
 
   const isPasswordValid = await argon2.verify(user.password, password);
   if (!isPasswordValid) {
-    res.status(401).json({ message: "Invalid username or password" });
+    res.status(401).json("Invalid username or password");
     return;
   }
 
-  const { password: _, ...userWithoutPassword } = user;
+  const { password: _, ...userWithoutPassword } = user.toObject();
+  console.log(userWithoutPassword);
 
   req.session!.user = userWithoutPassword;
 
   res.status(200).json({
-    _id: user._id,
     message: "Login successful",
-    user: userWithoutPassword,
+    ...userWithoutPassword,
   });
 }
 
