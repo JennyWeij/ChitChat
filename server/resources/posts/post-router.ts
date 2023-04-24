@@ -8,6 +8,18 @@ postRouter.get("/api/posts", async (req: Request, res: Response) => {
   res.json(posts);
 });
 
+postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
+  try {
+    const post = await PostModel.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json("Post not found");
+    }
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: "Could not retrieve post" });
+  }
+});
+
 postRouter.post("/api/posts", async (req: Request, res: Response) => {
   if (req.session && req.session.user && req.session.user._id) {
     try {
