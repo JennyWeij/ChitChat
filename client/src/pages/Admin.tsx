@@ -1,13 +1,9 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 
-
-import AdminSinglePost from "../components/AdminSinglePost";
-
-
 import { useEffect, useState } from "react";
 // import { posts } from "../../data";
 
-//import SinglePostCard from "../components/SinglePostCard";
+import SinglePostCard from "../components/SinglePostCard";
 
 import { themeAdmin } from "../theme";
 
