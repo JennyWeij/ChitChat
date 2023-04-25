@@ -10,7 +10,7 @@ const postSchema = yup.object({
 const postRouter = express.Router();
 
 postRouter.get("/api/posts", async (req: Request, res: Response) => {
-  const posts = await PostModel.find({});
+  const posts = await PostModel.find({}).populate("author");
   res.json(posts);
 });
 
@@ -22,7 +22,7 @@ postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
     }
     res.json(post);
   } catch (err) {
-    res.status(500).json({ message: "Could not retrieve post" });
+    res.status(500).json("Could not retrieve post");
   }
 });
 
@@ -34,23 +34,18 @@ postRouter.post("/api/posts", async (req: Request, res: Response) => {
         author: req.session.user._id,
       });
       res.status(201).json(post);
+      console.log;
     } catch (err) {
-      res.status(401).json({ message: "Could not create post" });
+      res.status(401).json("Could not create post");
     }
   } else {
-    res
-      .status(401)
-      .json(JSON.stringify({ message: "You must login to create a post" }));
+    res.status(401).json("You must login to create a post");
   }
 });
 
 postRouter.delete("/api/posts/:id", async (req, res) => {
   if (!req.session || !req.session.user || !req.session.user._id) {
-    return res
-      .status(401)
-      .json(
-        JSON.stringify({ message: "You must be logged in to delete a post" })
-      );
+    return res.status(401).json("You must log in to delete a post");
   }
   try {
     const post = await PostModel.findById(req.params.id);

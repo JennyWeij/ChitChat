@@ -1,11 +1,42 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { posts } from "../../data";
+import { useEffect, useState } from "react";
 
 import { themeAdmin } from "../theme";
 import AdminSinglePost from "./AdminSinglePost";
 
-export default function AdminStartPage() {
+interface User {
+  _id: string;
+  username: string;
+}
+
+interface Post {
+  _id: string;
+  author: User;
+  createdAt: string;
+  title: string;
+  content: string;
+}
+
+export default function AdminPage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  async function fetchData() {
+    try {
+      const postsResponse = await fetch("/api/posts");
+      if (!postsResponse.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const postsData = await postsResponse.json();
+      setPosts(postsData);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   useEffect(() => {
     // Change document.body background color to a linear gradient
     document.body.style.background =
@@ -25,15 +56,18 @@ export default function AdminStartPage() {
           <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
           <Box sx={wallBackground}>
-            {posts.map((post, index) => (
-              <AdminSinglePost
-                key={index}
-                name={post.name}
-                timestamp={post.timestamp}
-                title={post.title}
-                content={post.content}
-              />
-            ))}
+            {posts
+              .slice()
+              .reverse()
+              .map((post) => (
+                <AdminSinglePost
+                  key={post._id}
+                  name={post.author?.username || "Missing user"}
+                  timestamp={post.createdAt}
+                  title={post.title}
+                  content={post.content}
+                />
+              ))}
           </Box>
         </Box>
       </Box>
