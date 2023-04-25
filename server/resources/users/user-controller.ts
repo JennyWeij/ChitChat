@@ -6,7 +6,11 @@ import { UserModel } from "./user-model";
 //-------------USER-------------//
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required(),
+  username: Yup.string().required().min(3).test(
+    'isNotFalse',
+    'Username "false" is not allowed',
+    (value) => value !== 'false'
+  ),
   password: Yup.string().required().min(6),
 });
 
@@ -14,7 +18,9 @@ const validationSchema = Yup.object().shape({
 export async function registerUser(req: Request, res: Response) {
   try {
     const validatedData = await validationSchema.validate(req.body);
+    console.log(req.body);
     const { username, password } = validatedData;
+    console.log(validatedData);
 
     const existingUser = await UserModel.findOne({ username });
 
@@ -38,7 +44,7 @@ export async function registerUser(req: Request, res: Response) {
   }
 }
 
-//Logga in (ej klar)
+//Logga in
 export async function loginUser(req: Request, res: Response) {
   const { username, password } = req.body;
 
@@ -108,6 +114,7 @@ export async function changeUserRole(req: Request, res: Response) {
   }
 }
 
+//Ta bort användare
 export async function deleteUser(req: Request, res: Response) {
   const { id } = req.params;
 
