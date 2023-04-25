@@ -55,11 +55,11 @@ postRouter.delete("/api/posts/:id", async (req, res) => {
   try {
     const post = await PostModel.findByIdAndDelete(req.params.id);
     if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json(JSON.stringify({ message: `Post ${req.params.id} not found` }));
     }
     res.status(204).json({ message: "Post deleted successfully" });
   } catch (err) {
-    res.status(500).json(JSON.stringify({ message: "Could not delete post" }));
+    res.status(500).json(JSON.stringify({ message: "Could not delete post " }));
   }
 });
 
