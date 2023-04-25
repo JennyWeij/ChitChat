@@ -1,5 +1,5 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { themeAdmin } from "../theme";
 import AdminSinglePost from "./AdminSinglePost";
@@ -11,7 +11,7 @@ interface User {
 
 interface Post {
   _id: string;
-  author: string;
+  author: User;
   createdAt: string;
   title: string;
   content: string;
@@ -19,23 +19,15 @@ interface Post {
 
 export default function AdminPage() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
 
   async function fetchData() {
     try {
-      const [postsResponse, usersResponse] = await Promise.all([
-        fetch("/api/posts"),
-        fetch("/api/users"),
-      ]);
-      if (!postsResponse.ok || !usersResponse.ok) {
+      const postsResponse = await fetch("/api/posts");
+      if (!postsResponse.ok) {
         throw new Error("Network response was not ok");
       }
-      const [postsData, usersData] = await Promise.all([
-        postsResponse.json(),
-        usersResponse.json(),
-      ]);
+      const postsData = await postsResponse.json();
       setPosts(postsData);
-      setUsers(usersData);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -44,11 +36,6 @@ export default function AdminPage() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  function getAuthorName(authorId: string) {
-    const user = users.find((user) => user._id === authorId);
-    return user ? user.username : "";
-  }
 
   useEffect(() => {
     // Change document.body background color to a linear gradient
@@ -75,7 +62,7 @@ export default function AdminPage() {
               .map((post) => (
                 <AdminSinglePost
                   key={post._id}
-                  name={getAuthorName(post.author)}
+                  name={post.author?.username || "Missing user"}
                   timestamp={post.createdAt}
                   title={post.title}
                   content={post.content}

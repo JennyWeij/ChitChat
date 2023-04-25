@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { theme } from "../theme";
+import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
 
 interface User {
@@ -11,31 +12,27 @@ interface User {
 
 interface Post {
   _id: string;
-  author: string;
+  author: User;
   createdAt: string;
   title: string;
   content: string;
 }
 
+function handleCreatePost(values: { content: string }) {
+  console.log(values);
+}
+
 export default function UserStartPage() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
 
   async function fetchData() {
     try {
-      const [postsResponse, usersResponse] = await Promise.all([
-        fetch("/api/posts"),
-        fetch("/api/users"),
-      ]);
-      if (!postsResponse.ok || !usersResponse.ok) {
+      const postsResponse = await fetch("/api/posts");
+      if (!postsResponse.ok) {
         throw new Error("Network response was not ok");
       }
-      const [postsData, usersData] = await Promise.all([
-        postsResponse.json(),
-        usersResponse.json(),
-      ]);
+      const postsData = await postsResponse.json();
       setPosts(postsData);
-      setUsers(usersData);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -45,14 +42,15 @@ export default function UserStartPage() {
     fetchData();
   }, []);
 
-  function getAuthorName(authorId: string) {
-    const user = users.find((user) => user._id === authorId);
-    return user ? user.username : "";
-  }
-
   return (
     <Box sx={{ textAlign: "center" }}>
-      {/* ... */}
+      <Typography sx={{ marginTop: "2rem" }} variant="h2">
+        Create a new post
+      </Typography>
+
+      <Box sx={formBackground}>
+        <CreatePostForm onSubmit={handleCreatePost} />
+      </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
@@ -63,7 +61,7 @@ export default function UserStartPage() {
             .map((post) => (
               <SinglePostCard
                 key={post._id}
-                name={getAuthorName(post.author)}
+                name={post.author?.username || "Missing user"}
                 timestamp={post.createdAt}
                 title={post.title}
                 content={post.content}

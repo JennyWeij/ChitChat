@@ -4,7 +4,7 @@ import PostModel from "./post-model";
 const postRouter = express.Router();
 
 postRouter.get("/api/posts", async (req: Request, res: Response) => {
-  const posts = await PostModel.find({});
+  const posts = await PostModel.find({}).populate("author");
   res.json(posts);
 });
 
