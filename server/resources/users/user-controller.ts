@@ -44,7 +44,7 @@ export async function registerUser(req: Request, res: Response) {
   }
 }
 
-//Logga in (ej klar)
+//Logga in
 export async function loginUser(req: Request, res: Response) {
   const { username, password } = req.body;
 
@@ -114,6 +114,7 @@ export async function changeUserRole(req: Request, res: Response) {
   }
 }
 
+//Ta bort användare
 export async function deleteUser(req: Request, res: Response) {
   const { id } = req.params;
 
