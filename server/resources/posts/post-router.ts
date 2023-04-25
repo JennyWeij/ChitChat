@@ -18,7 +18,7 @@ postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
   try {
     const post = await PostModel.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ message: `Post ${req.params.id} not found` });
+      return res.status(404).json(JSON.stringify({ message: `Post ${req.params.id} not found` }));
     }
     res.json(post);
   } catch (err) {
