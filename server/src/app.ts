@@ -1,6 +1,7 @@
 import cookieSession from "cookie-session";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
+import { ValidationError } from "yup";
 import postRouter from "../resources/posts/post-router";
 import userRouter from "../resources/users/user-router";
 
@@ -31,3 +32,14 @@ app.get("/", (req, res) => {
 });
 
 // global felhantering
+app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+
+  if (err instanceof ValidationError) {
+    res.status(400).json(err.message);
+  } else if (err instanceof Error) {
+    res.status(500).json(err.message);
+  } else {
+    res.status(500).json("Unknown error");
+  }
+});
