@@ -6,12 +6,8 @@ import { UserModel } from "./user-model";
 //-------------USER-------------//
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required().min(3).test(
-    'isNotFalse',
-    'Username "false" is not allowed',
-    (value) => value !== 'false'
-  ),
-  password: Yup.string().required().min(6),
+  username: Yup.string().required().min(3).strict(),
+  password: Yup.string().required().min(6).strict(),
 });
 
 //Registrera ny användare
