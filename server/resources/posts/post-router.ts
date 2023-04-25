@@ -66,19 +66,29 @@ postRouter.put("/api/posts/:id", async (req: Request, res: Response) => {
       );
   }
   try {
-    const post = await PostModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        title: req.body.title,
-        content: req.body.content,
-      },
-      { new: true }
-    );
+    const post = await PostModel.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
+    if (post.author.toString() !== req.session.user._id.toString()) {
+      return res.status(403).json(
+        JSON.stringify({
+          message: "You are not authorized to update this post",
+        })
+      );
+    }
+    post.title = req.body.title || post.title;
+    post.content = req.body.content || post.content;
+    await post.save();
     res.json(post);
   } catch (err) {
+    if (err.name === "ValidationError") {
+      // const typedError = error as Error;
+      return res.status(400).json({
+        message: "Incorrect or missing values for post",
+        errors: err.errors,
+      });
+    }
     res.status(500).json(JSON.stringify({ message: "Could not update post" }));
   }
 });
