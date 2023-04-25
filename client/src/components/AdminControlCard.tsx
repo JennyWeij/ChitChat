@@ -1,9 +1,8 @@
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ClearIcon from "@mui/icons-material/Clear";
 import PersonIcon from "@mui/icons-material/Person";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { theme, themeAdmin } from "../theme";
 
 interface Props {
@@ -14,8 +13,13 @@ interface Props {
   deleteUser: (userId: string) => Promise<void>;
 }
 
-export default function AdminControlCard({ name, isAdmin, userId, promoteUser, deleteUser }: Props) {
-
+export default function AdminControlCard({
+  name,
+  isAdmin,
+  userId,
+  promoteUser,
+  deleteUser,
+}: Props) {
   return (
     <Box sx={panelContainer}>
       <Box sx={panel}>
@@ -44,23 +48,22 @@ export default function AdminControlCard({ name, isAdmin, userId, promoteUser, d
           flexDirection="row"
           borderRadius="1rem"
         >
-          {isAdmin ? (
-            <ArrowCircleDownIcon
+            {isAdmin ? null : (
+          <Button>
+              <ArrowCircleUpIcon
+                color="info"
+                fontSize="large"
+                onClick={() => promoteUser(userId)}
+              />
+          </Button>
+            )}
+          <Button>
+            <ClearIcon
               color="info"
               fontSize="large"
+              onClick={() => deleteUser(userId)}
             />
-          ) : (
-            <ArrowCircleUpIcon
-              color="info"
-              fontSize="large"
-              onClick={() => promoteUser(userId)}
-            />
-          )}
-          <ClearIcon
-            color="info"
-            fontSize="large"
-            onClick={() => deleteUser(userId)}
-          />
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -84,3 +87,5 @@ const panel = {
   borderRadius: "0.5rem",
   width: { xs: "20rem", sm: "30rem" },
 };
+
+
