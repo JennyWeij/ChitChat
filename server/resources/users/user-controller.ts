@@ -44,7 +44,7 @@ export async function registerUser(req: Request, res: Response) {
 export async function loginUser(req: Request, res: Response) {
   const { username, password } = req.body;
 
-  const user = await UserModel.findOne({ username });
+  const user = await UserModel.findOne({ username }).select("+password");
   if (!user) {
     res.status(401).json("Invalid username or password");
     return;
@@ -106,7 +106,9 @@ export async function changeUserRole(req: Request, res: Response) {
     const { password: _, ...userWithoutPassword } = user.toObject();
     res.status(200).json(userWithoutPassword);
   } catch (error) {
-    res.status(400).json({ message: "An error occurred while updating the user's role" });
+    res
+      .status(400)
+      .json({ message: "An error occurred while updating the user's role" });
   }
 }
 
