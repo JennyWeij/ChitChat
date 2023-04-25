@@ -51,3 +51,12 @@ Content-Type: application/json
 
 ### Delete user
 DELETE http://localhost:3000/api/users/644273b3979df454b9353c9c
+
+### PUT a post
+PUT http://localhost:3000/api/posts/44795d18642385dabff45ff
+Content-Type: application/json
+
+{
+  "content": "New content here"
+}
+
