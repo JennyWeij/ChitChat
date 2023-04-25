@@ -52,15 +52,18 @@ export default function AdminPage() {
           <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
           <Box sx={wallBackground}>
-            {data.map((post) => (
-              <AdminSinglePost
-                key={post._id}
-                name={post.author}
-                timestamp={post.createdAt}
-                title={post.title}
-                content={post.content}
-              />
-            ))}
+            {data
+              .slice()
+              .reverse()
+              .map((post) => (
+                <AdminSinglePost
+                  key={post._id}
+                  name={post.author}
+                  timestamp={post.createdAt}
+                  title={post.title}
+                  content={post.content}
+                />
+              ))}
           </Box>
         </Box>
       </Box>

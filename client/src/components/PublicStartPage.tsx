@@ -46,15 +46,18 @@ export default function PublicStartPage() {
         <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
-          {data.map((post) => (
-            <SinglePostCard
-              key={post._id}
-              name={post.author}
-              timestamp={post.createdAt}
-              title={post.title}
-              content={post.content}
-            />
-          ))}
+          {data
+            .slice()
+            .reverse()
+            .map((post) => (
+              <SinglePostCard
+                key={post._id}
+                name={post.author}
+                timestamp={post.createdAt}
+                title={post.title}
+                content={post.content}
+              />
+            ))}
         </Box>
       </Box>
     </Box>
