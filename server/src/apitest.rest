@@ -3,7 +3,7 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-  "username": "testuser",
+  "username": "testuser1",
   "password": "testpassword"
 }
 
@@ -40,9 +40,17 @@ Content-Type: application/json
 
 GET http://localhost:3000/api/posts
 
-### Delete a post
-DELETE  http://localhost:3000/api/posts/:id
 
+### Promote user to admin
+PUT http://localhost:3000/api/users/644273b3979df454b9353c9c
+Content-Type: application/json
+
+{
+  "isAdmin": true
+}
+
+### Delete user
+DELETE http://localhost:3000/api/users/644273b3979df454b9353c9c
 ### PUT a post
 PUT http://localhost:3000/api/posts/:id
 Content-Type: application/json
