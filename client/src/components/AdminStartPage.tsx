@@ -1,43 +1,11 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
-
-
-import AdminSinglePost from "../components/AdminSinglePost";
-
-
-import { useEffect, useState } from "react";
-// import { posts } from "../../data";
-
-//import SinglePostCard from "../components/SinglePostCard";
+import { useEffect } from "react";
+import { posts } from "../../data";
 
 import { themeAdmin } from "../theme";
+import AdminSinglePost from "./AdminSinglePost";
 
-interface Post {
-  _id: string;
-  author: string;
-  createdAt: string;
-  title: string;
-  content: string;
-}
-
-export default function AdminPage() {
-  const [data, setData] = useState<Post[]>([]);
-
-  useEffect(() => {
-    fetch("/api/posts")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data: Post[]) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.log("Error fetching data:", error);
-      });
-  }, []);
-
+export default function AdminStartPage() {
   useEffect(() => {
     // Change document.body background color to a linear gradient
     document.body.style.background =
@@ -57,11 +25,11 @@ export default function AdminPage() {
           <Typography variant="h2">All posts</Typography>
           <Divider sx={dividerStyling} />
           <Box sx={wallBackground}>
-            {data.map((post) => (
-              <SinglePostCard
-                key={post._id}
-                name={post.author}
-                timestamp={post.createdAt}
+            {posts.map((post, index) => (
+              <AdminSinglePost
+                key={index}
+                name={post.name}
+                timestamp={post.timestamp}
                 title={post.title}
                 content={post.content}
               />

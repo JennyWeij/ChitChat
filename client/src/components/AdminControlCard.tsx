@@ -8,30 +8,59 @@ import { theme, themeAdmin } from "../theme";
 
 interface Props {
   name: string;
-  role: string;
+  isAdmin: boolean;
+  userId: string;
+  promoteUser: (userId: string) => Promise<void>;
+  deleteUser: (userId: string) => Promise<void>;
 }
 
-export default function AdminControlCard({ name, role }: Props) {
+export default function AdminControlCard({ name, isAdmin, userId, promoteUser, deleteUser }: Props) {
+
   return (
     <Box sx={panelContainer}>
       <Box sx={panel}>
-        <Box display="flex" flexDirection="row" alignItems="center">
-          {role === "admin" ? (
-            <AdminPanelSettingsIcon color="info" fontSize="large" />
-          ) : role === "user" ? (
-            <PersonIcon color="info" fontSize="large" />
-          ) : null}
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+        >
+          {isAdmin ? (
+            <AdminPanelSettingsIcon
+              color="info"
+              fontSize="large"
+            />
+          ) : (
+            <PersonIcon
+              color="info"
+              fontSize="large"
+            />
+          )}
           <Typography sx={{ color: theme.palette.black.main }}>
             {name}
           </Typography>
         </Box>
-        <Box display="flex" flexDirection="row" borderRadius="1rem">
-          {role === "admin" ? (
-            <ArrowCircleDownIcon color="info" fontSize="large" />
-          ) : role === "user" ? (
-            <ArrowCircleUpIcon color="info" fontSize="large" />
-          ) : null}
-          <ClearIcon color="info" fontSize="large" />
+        <Box
+          display="flex"
+          flexDirection="row"
+          borderRadius="1rem"
+        >
+          {isAdmin ? (
+            <ArrowCircleDownIcon
+              color="info"
+              fontSize="large"
+            />
+          ) : (
+            <ArrowCircleUpIcon
+              color="info"
+              fontSize="large"
+              onClick={() => promoteUser(userId)}
+            />
+          )}
+          <ClearIcon
+            color="info"
+            fontSize="large"
+            onClick={() => deleteUser(userId)}
+          />
         </Box>
       </Box>
     </Box>

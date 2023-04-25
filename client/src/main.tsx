@@ -11,7 +11,7 @@ import "./index.css";
 
 import AdminControlPage from "./pages/AdminControlPage";
 
-import Admin from "./pages/Admin";
+import Admin from "./components/AdminStartPage";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 
