@@ -6,6 +6,7 @@ interface Props {
 
 export interface AuthContextValue {
   isLoggedIn: boolean;
+  isAdmin: boolean;
   username: string | null;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   login: (username: string, password: string) => Promise<boolean>;
@@ -14,6 +15,7 @@ export interface AuthContextValue {
 
 const initialAuthValues: AuthContextValue = {
   isLoggedIn: false,
+  isAdmin: false,
   username: null,
   setIsLoggedIn: () => {},
   login: async (username: string, password: string) => {
@@ -28,6 +30,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }: Props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
 
   const getSession = async () => {
@@ -41,6 +44,7 @@ export default function AuthProvider({ children }: Props) {
         const user = await response.json();
         setUsername(user.username);
         setIsLoggedIn(true);
+        setIsAdmin(user.isAdmin);
       } else {
         console.error("Error fetching session:", await response.text());
       }
@@ -80,7 +84,7 @@ export default function AuthProvider({ children }: Props) {
 
   const logout = async () => {
     const response = await fetch("/api/users/logout", {
-      method: "DELETE",
+      method: "POST",
       credentials: "include",
     });
 
@@ -95,7 +99,7 @@ export default function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, username, setIsLoggedIn, login, logout }}
+      value={{ isLoggedIn, isAdmin, username, setIsLoggedIn, login, logout }}
     >
       {children}
     </AuthContext.Provider>

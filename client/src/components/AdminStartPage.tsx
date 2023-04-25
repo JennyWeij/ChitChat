@@ -1,9 +1,8 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import AdminSinglePost from "../components/AdminSinglePost";
-// import { posts } from "../../data";
+import { useEffect } from "react";
 
 import { themeAdmin } from "../theme";
+import AdminSinglePost from "./AdminSinglePost";
 
 interface User {
   _id: string;
