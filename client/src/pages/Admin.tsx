@@ -1,8 +1,8 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import AdminSinglePost from "../components/AdminSinglePost";
 // import { posts } from "../../data";
 
-import SinglePostCard from "../components/SinglePostCard";
 import { themeAdmin } from "../theme";
 
 interface Post {
@@ -16,20 +16,21 @@ interface Post {
 export default function AdminPage() {
   const [data, setData] = useState<Post[]>([]);
 
+  async function fetchData() {
+    try {
+      const response = await fetch("/api/posts");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  }
+
   useEffect(() => {
-    fetch("/api/posts")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data: Post[]) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.log("Error fetching data:", error);
-      });
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function AdminPage() {
           <Divider sx={dividerStyling} />
           <Box sx={wallBackground}>
             {data.map((post) => (
-              <SinglePostCard
+              <AdminSinglePost
                 key={post._id}
                 name={post.author}
                 timestamp={post.createdAt}

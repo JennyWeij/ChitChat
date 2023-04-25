@@ -15,20 +15,21 @@ interface Post {
 export default function PublicStartPage() {
   const [data, setData] = useState<Post[]>([]);
 
+  async function fetchData() {
+    try {
+      const response = await fetch("/api/posts");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  }
+
   useEffect(() => {
-    fetch("/api/posts")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data: Post[]) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.log("Error fetching data:", error);
-      });
+    fetchData();
   }, []);
 
   return (
@@ -42,7 +43,7 @@ export default function PublicStartPage() {
         </TextButton>
       </Box>
       <Box sx={wallContainer}>
-        <Typography variant="h2">Lastest posts</Typography>
+        <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
           {data.map((post) => (
