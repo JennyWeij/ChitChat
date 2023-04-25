@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { theme } from "../theme";
 import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
+interface User {
+  _id: string;
+  username: string;
+}
 
 interface Post {
   _id: string;
@@ -13,16 +17,24 @@ interface Post {
 }
 
 export default function PublicStartPage() {
-  const [data, setData] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   async function fetchData() {
     try {
-      const response = await fetch("/api/posts");
-      if (!response.ok) {
+      const [postsResponse, usersResponse] = await Promise.all([
+        fetch("/api/posts"),
+        fetch("/api/users"),
+      ]);
+      if (!postsResponse.ok || !usersResponse.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
-      setData(data);
+      const [postsData, usersData] = await Promise.all([
+        postsResponse.json(),
+        usersResponse.json(),
+      ]);
+      setPosts(postsData);
+      setUsers(usersData);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -31,6 +43,11 @@ export default function PublicStartPage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  function getAuthorName(authorId: string) {
+    const user = users.find((user) => user._id === authorId);
+    return user ? user.username : "";
+  }
 
   return (
     <Box>
@@ -46,13 +63,13 @@ export default function PublicStartPage() {
         <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
-          {data
+          {posts
             .slice()
             .reverse()
             .map((post) => (
               <SinglePostCard
                 key={post._id}
-                name={post.author}
+                name={getAuthorName(post.author)}
                 timestamp={post.createdAt}
                 title={post.title}
                 content={post.content}

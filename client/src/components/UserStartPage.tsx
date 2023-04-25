@@ -1,10 +1,13 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-// import { Post } from "../../data";
-// import { Post, posts } from "../../data";
+
 import { theme } from "../theme";
-import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
+
+interface User {
+  _id: string;
+  username: string;
+}
 
 interface Post {
   _id: string;
@@ -14,21 +17,25 @@ interface Post {
   content: string;
 }
 
-function handleCreatePost(values: { content: string }) {
-  console.log(values);
-}
-
 export default function UserStartPage() {
-  const [data, setData] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   async function fetchData() {
     try {
-      const response = await fetch("/api/posts");
-      if (!response.ok) {
+      const [postsResponse, usersResponse] = await Promise.all([
+        fetch("/api/posts"),
+        fetch("/api/users"),
+      ]);
+      if (!postsResponse.ok || !usersResponse.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
-      setData(data);
+      const [postsData, usersData] = await Promise.all([
+        postsResponse.json(),
+        usersResponse.json(),
+      ]);
+      setPosts(postsData);
+      setUsers(usersData);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -38,25 +45,25 @@ export default function UserStartPage() {
     fetchData();
   }, []);
 
+  function getAuthorName(authorId: string) {
+    const user = users.find((user) => user._id === authorId);
+    return user ? user.username : "";
+  }
+
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography sx={{ marginTop: "2rem" }} variant="h2">
-        Create a new post
-      </Typography>
-      <Box sx={formBackground}>
-        <CreatePostForm onSubmit={handleCreatePost} />
-      </Box>
+      {/* ... */}
       <Box sx={wallContainer}>
-        <Typography variant="h2">Lastest posts</Typography>
+        <Typography variant="h2">Latest posts</Typography>
         <Divider sx={dividerStyling} />
         <Box sx={wallBackground}>
-          {data
+          {posts
             .slice()
             .reverse()
             .map((post) => (
               <SinglePostCard
                 key={post._id}
-                name={post.author}
+                name={getAuthorName(post.author)}
                 timestamp={post.createdAt}
                 title={post.title}
                 content={post.content}
