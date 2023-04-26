@@ -5,19 +5,6 @@ import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
 
-interface User {
-  _id: string;
-  username: string;
-}
-
-interface Post {
-  _id: string;
-  author: User;
-  createdAt: string;
-  title: string;
-  content: string;
-}
-
 export default function UserStartPage() {
   const { posts, fetchPosts } = usePosts();
 
@@ -54,7 +41,10 @@ export default function UserStartPage() {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography sx={{ marginTop: "2rem" }} variant="h2">
+      <Typography
+        sx={{ marginTop: "2rem" }}
+        variant="h2"
+      >
         Create a new post
       </Typography>
 
@@ -114,5 +104,5 @@ const formBackground = {
   padding: "1rem 2rem",
   borderRadius: "35px",
   margin: "1rem auto",
-  textAlign: "start" ,
+  textAlign: "start",
 };
