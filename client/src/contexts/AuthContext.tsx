@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -52,6 +52,10 @@ export default function AuthProvider({ children }: Props) {
       console.error("Error fetching session:", error);
     }
   };
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   const login = async (
     username: string,
