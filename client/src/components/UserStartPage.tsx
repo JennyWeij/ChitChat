@@ -53,7 +53,7 @@ export default function UserStartPage() {
   }
 
   return (
-    <Box sx={{ textAlign: "start" }}>
+    <Box sx={{ textAlign: "center" }}>
       <Typography sx={{ marginTop: "2rem" }} variant="h2">
         Create a new post
       </Typography>
@@ -114,4 +114,5 @@ const formBackground = {
   padding: "1rem 2rem",
   borderRadius: "35px",
   margin: "1rem auto",
+  textAlign: "start" ,
 };
