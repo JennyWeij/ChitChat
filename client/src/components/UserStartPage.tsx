@@ -1,22 +1,10 @@
 import { Box, Divider, Typography } from "@mui/material";
 
-import { usePosts } from "../hooks/usePosts";
+
+import { usePosts } from "../contexts/PostsContext";
 import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
-
-interface User {
-  _id: string;
-  username: string;
-}
-
-interface Post {
-  _id: string;
-  author: User;
-  createdAt: string;
-  title: string;
-  content: string;
-}
 
 export default function UserStartPage() {
   const { posts, fetchPosts } = usePosts();

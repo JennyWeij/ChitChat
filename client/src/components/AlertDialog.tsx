@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
+import { usePosts } from "../contexts/PostsContext";
 import { theme, themeAdmin } from "../theme";
 
 interface Post {
@@ -15,6 +16,7 @@ interface Post {
 
 export default function AlertDialog(props: Post) {
   const [open, setOpen] = React.useState(false);
+  const { posts, fetchPosts } = usePosts();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,6 +33,7 @@ export default function AlertDialog(props: Post) {
         credentials: "include",
       });
       if (res.ok) {
+        fetchPosts();
         handleClose();
       } else {
         throw new Error("Failed to delete post");
