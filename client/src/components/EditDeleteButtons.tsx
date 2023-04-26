@@ -2,13 +2,17 @@ import { Box, useTheme } from "@mui/material";
 import AlertDialog from "./AlertDialog";
 import EditDialogAdmin from "./EditDialogAdmin";
 
-export default function EditDeleteButtons() {
+interface Props {
+  id: string;
+}
+
+export default function EditDeleteButtons({ id }: Props) {
   const theme = useTheme();
 
   return (
     <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
       <EditDialogAdmin />
-      <AlertDialog />
+      <AlertDialog {...{ id }} />
     </Box>
   );
 }

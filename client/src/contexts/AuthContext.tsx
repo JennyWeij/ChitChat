@@ -39,12 +39,14 @@ export default function AuthProvider({ children }: Props) {
         method: "GET",
         credentials: "include",
       });
-
+  
       if (response.ok) {
         const user = await response.json();
         setUsername(user.username);
         setIsLoggedIn(true);
         setIsAdmin(user.isAdmin);
+      } else if (response.status === 401) {
+        console.info("No active session, user not logged in.");
       } else {
         console.error("Error fetching session:", await response.text());
       }
