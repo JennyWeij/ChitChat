@@ -15,6 +15,7 @@ interface PostEditContextData {
   post: Post | null;
   fetchPost: (id: string) => Promise<void>;
   loading: boolean;
+  updatePost: (id: string, title: string, content: string) => Promise<void>;
 }
 
 interface Props {
@@ -54,9 +55,30 @@ export const PostEditProvider = ({ children }: Props) => {
     }
   }, []);
 
+  const updatePost = useCallback(
+    async (id: string, title: string, content: string) => {
+      try {
+        const response = await fetch(`/api/posts/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, content }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update post");
+        }
+      } catch (error) {
+        console.error("Error updating post:", error);
+      }
+    },
+    []
+  );
+
   return (
     <PostEditContext.Provider
-      value={{ postIdToEdit, setPostIdToEdit, post, fetchPost, loading }}
+      value={{ postIdToEdit, setPostIdToEdit, post, fetchPost, loading, updatePost }}
     >
       {children}
     </PostEditContext.Provider>

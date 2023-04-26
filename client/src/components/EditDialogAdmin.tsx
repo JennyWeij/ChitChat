@@ -25,12 +25,14 @@ export interface DialogTitleProps {
   onClose: () => void;
 }
 
-
 function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <DialogTitle
+      sx={{ m: 0, p: 2 }}
+      {...other}
+    >
       {children}
       {onClose ? (
         <IconButton
@@ -53,7 +55,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 export default function EditDialogAdmin() {
   const [open, setOpen] = useState(false);
   const [requestedOpen, setRequestedOpen] = useState(false);
-  const { postIdToEdit, fetchPost, post, loading } = usePostEdit();
+  const { postIdToEdit, fetchPost, post, loading, updatePost } = usePostEdit();
 
   const handleClickOpen = () => {
     if (post && !loading) {
@@ -62,7 +64,6 @@ export default function EditDialogAdmin() {
       setRequestedOpen(true);
     }
   };
-
   const handleClose = () => {
     setOpen(false);
     setRequestedOpen(false);
@@ -80,9 +81,19 @@ export default function EditDialogAdmin() {
     }
   }, [requestedOpen, postIdToEdit, loading, post]);
 
+  const handleSubmit = async (values: { title: string; content: string }) => {
+    if (postIdToEdit) {
+      await updatePost(postIdToEdit, values.title, values.content);
+      handleClose();
+    }
+  };
+
   return (
     <div>
-      <EditNote sx={editIcon} onClick={handleClickOpen} />
+      <EditNote
+        sx={editIcon}
+        onClick={handleClickOpen}
+      />
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -95,14 +106,11 @@ export default function EditDialogAdmin() {
           Edit post
         </BootstrapDialogTitle>
         <DialogContent dividers>
-        <CreatePostForm
-          onSubmit={(values) => {
-            console.log(values);
-            // Handle form submission
-          }}
-          post={post}
-          isEditing={true}
-        />
+          <CreatePostForm
+            onSubmit={handleSubmit}
+            post={post}
+            isEditing={true}
+          />
         </DialogContent>
         <DialogActions>
           {/* <Button autoFocus onClick={handleClose}>
