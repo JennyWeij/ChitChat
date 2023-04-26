@@ -22,6 +22,14 @@ export default function SinglePostCard({
 
   const showEditDeleteButtons = name === username;
 
+  const formattedTimestamp = new Date(timestamp).toLocaleString("sv-SE", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <Box sx={flexBox}>
       <Card sx={cardStyling}>
@@ -29,15 +37,32 @@ export default function SinglePostCard({
           <Box sx={cardHeader}>
             <Box sx={nameAndIcon}>
               <PersonOutline sx={iconStyling} />
-              <Typography variant="h5">{name}</Typography>
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.2rem",
+                    md: "1.3rem",
+                    lg: "1.3rem",
+                  },
+                }}
+                variant="h5"
+              >
+                {name}
+              </Typography>
             </Box>
-            <Typography sx={timeStyling}>{timestamp}</Typography>
+            <Typography sx={timeStyling}>{formattedTimestamp}</Typography>
           </Box>
           <Divider sx={dividerStyling} />
           <Typography
             sx={{
               textAlign: "left",
-              fontSize: "20px",
+              fontSize: {
+                xs: "1rem",
+                sm: "1.3rem",
+                md: "1.3rem",
+                lg: "1.3rem",
+              },
               fontWeight: "bold",
               marginBottom: "1rem",
             }}
@@ -45,7 +70,20 @@ export default function SinglePostCard({
           >
             {title}
           </Typography>
-          <Typography variant="body2">{content}</Typography>
+          <Typography
+            sx={{
+              textAlign: "left",
+              fontSize: {
+                xs: "1rem",
+                sm: "1.1rem",
+                md: "1.1rem",
+                lg: "1.2rem",
+              },
+            }}
+            variant="body2"
+          >
+            {content}
+          </Typography>
         </CardContent>
       </Card>
       {showEditDeleteButtons && <EditDeleteButtons />}
@@ -54,7 +92,7 @@ export default function SinglePostCard({
 }
 
 const cardStyling = {
-  maxWidth: "500px",
+  width: { xs: "16rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
   padding: "5px 15px",
 };
@@ -84,7 +122,7 @@ const dividerStyling = {
 const timeStyling = {
   color: theme.palette.lighttext.main,
   fontFamily: "Sulphur Point",
-  fontSize: "20px",
+  fontSize: { xs: "0.8rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
 };
 
 const flexBox = {
