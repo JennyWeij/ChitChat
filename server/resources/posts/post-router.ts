@@ -21,19 +21,18 @@ postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
 });
 
 postRouter.post("/api/posts", async (req: Request, res: Response) => {
-  if (req.session && req.session.user && req.session.user._id) {
-    try {
-      const post = await PostModel.create({
-        ...req.body,
-        author: req.session.user._id,
-      });
-      res.status(201).json(post);
-      console.log;
-    } catch (err) {
-      res.status(401).json("Could not create post");
-    }
-  } else {
-    res.status(401).json("You must login to create a post");
+  if (!req.session || !req.session.user || !req.session.user._id) {
+    // Return 401 if the user is not logged in
+    return res.status(401).json("You must login to create a post");
+  }
+  try {
+    const post = await PostModel.create({
+      ...req.body,
+      author: req.session.user._id,
+    });
+    res.status(201).json(post);
+  } catch (err) {
+    res.status(401).json("Could not create post");
   }
 });
 
