@@ -1,6 +1,6 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
+import { usePosts } from "../hooks/usePosts";
 import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
@@ -19,24 +19,7 @@ interface Post {
 }
 
 export default function UserStartPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  async function fetchData() {
-    try {
-      const postsResponse = await fetch("/api/posts");
-      if (!postsResponse.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const postsData = await postsResponse.json();
-      setPosts(postsData);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { posts, fetchPosts } = usePosts();
 
   async function createPost(values: { title: string; content: string }) {
     try {
@@ -65,7 +48,7 @@ export default function UserStartPage() {
     console.log("handleCreatePost called with values:", values);
     const newPost = await createPost(values);
     if (newPost) {
-      setPosts((prevPosts) => [newPost, ...prevPosts]);
+      fetchPosts();
     }
   }
 
