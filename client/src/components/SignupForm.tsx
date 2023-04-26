@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Field, FieldProps, Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { theme } from "../theme";
 
@@ -21,9 +22,14 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function SignupForm() {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: FormValues) => {
     console.log("Form data:", values);
-    await register(values.username, values.password);
+     const success = await register(values.username, values.password);
+    if (success) {
+      navigate("/login");
+    }
   };
 
   async function register(username: string, password: string) {
@@ -38,8 +44,10 @@ export default function SignupForm() {
     const data = await response.json();
     if (response.ok) {
       console.log("User registered:", data);
+      return true;
     } else {
       console.error("Registration error:", data.message);
+      return false;
     }
   }
 

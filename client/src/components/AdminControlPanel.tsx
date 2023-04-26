@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { useUsers } from "../hooks/useUsers";
 import { themeAdmin } from "../theme";
 import AdminControlCard from "./AdminControlCard";
@@ -50,25 +50,12 @@ export default function AdminControlPanel() {
   }
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      flexDirection="column"
-    >
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginBottom="3rem"
-      >
-        <Typography
-          variant="h2"
-          fontWeight="bold"
-        >
-          Admin
-        </Typography>
-      </Box>
-      <Typography sx={underTitel}>All Users</Typography>
-      <Divider sx={dividerStyling} />
+    <ThemeProvider theme={themeAdmin}>
+    <Box sx={{ textAlign: "center" }}>
+      <Typography sx={adminTitle}>ADMIN</Typography>
+      <Box sx={wallContainer}>
+        <Typography variant="h2">All posts</Typography>
+        <Divider sx={dividerStyling} />
 
       {/* Admin user */}
       {adminUsers.map((user, index) => (
@@ -93,16 +80,11 @@ export default function AdminControlPanel() {
           deleteUser={deleteUser}
         />
       ))}
-    </Box>
+           </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
-
-const container = {
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  alignItems: "center",
-};
 
 const adminTitle = {
   fontWeight: "bold",
@@ -117,8 +99,9 @@ const dividerStyling = {
   margin: "1rem",
 };
 
-const underTitel = {
-  // variant: "h2",
-  fontSize: "h2",
-  color: themeAdmin.palette.darktext.main,
+const wallContainer = {
+  display: "flex",
+  marginTop: "3rem",
+  alignItems: "center",
+  flexDirection: "column",
 };
