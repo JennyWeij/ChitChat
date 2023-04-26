@@ -42,7 +42,10 @@ export default function UserStartPage() {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography sx={{ marginTop: "2rem" }} variant="h2">
+      <Typography
+        sx={{ marginTop: "2rem" }}
+        variant="h2"
+      >
         Create a new post
       </Typography>
 

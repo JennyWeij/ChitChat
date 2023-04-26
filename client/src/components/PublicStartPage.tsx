@@ -1,41 +1,11 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { usePosts } from "../hooks/usePosts";
 import { theme } from "../theme";
 import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
 
-interface User {
-  _id: string;
-  username: string;
-}
-
-interface Post {
-  _id: string;
-  author: User;
-  createdAt: string;
-  title: string;
-  content: string;
-}
-
 export default function PublicStartPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  async function fetchData() {
-    try {
-      const postsResponse = await fetch("/api/posts");
-      if (!postsResponse.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const postsData = await postsResponse.json();
-      setPosts(postsData);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { posts, fetchPosts } = usePosts();  
 
   return (
     <Box>
