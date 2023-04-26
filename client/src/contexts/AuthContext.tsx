@@ -95,6 +95,7 @@ export default function AuthProvider({ children }: Props) {
     if (response.ok) {
       setIsLoggedIn(false);
       setUsername(null);
+      setIsAdmin(false);
     } else {
       const data = await response.json();
       console.error("Logout error:", data.message);
