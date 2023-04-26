@@ -6,8 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import { useEffect, useState } from "react";
-import { usePostEdit } from "../contexts/PostEditContext";
+import { useState } from "react";
+import { usePosts } from "../contexts/PostsContext";
 import CreatePostForm from "./CreatePostForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -23,6 +23,12 @@ export interface DialogTitleProps {
   id: string;
   children?: React.ReactNode;
   onClose: () => void;
+}
+
+interface EditDialogAdminProps {
+  postId: string;
+  currentTitle: string;
+  currentContent: string;
 }
 
 function BootstrapDialogTitle(props: DialogTitleProps) {
@@ -52,40 +58,25 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export default function EditDialogAdmin() {
+export default function EditDialogAdmin({
+  postId,
+  currentTitle,
+  currentContent,
+}: EditDialogAdminProps) {
   const [open, setOpen] = useState(false);
-  const [requestedOpen, setRequestedOpen] = useState(false);
-  const { postIdToEdit, fetchPost, post, loading, updatePost } = usePostEdit();
+  const { posts, fetchPosts, updatePost } = usePosts();
 
   const handleClickOpen = () => {
-    if (post && !loading) {
-      setOpen(true);
-    } else {
-      setRequestedOpen(true);
-    }
+    setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-    setRequestedOpen(false);
   };
 
-  useEffect(() => {
-    if (postIdToEdit) {
-      fetchPost(postIdToEdit);
-    }
-  }, [postIdToEdit, fetchPost]);
-
-  useEffect(() => {
-    if (requestedOpen && postIdToEdit && !loading && post) {
-      setOpen(true);
-    }
-  }, [requestedOpen, postIdToEdit, loading, post]);
-
   const handleSubmit = async (values: { title: string; content: string }) => {
-    if (postIdToEdit) {
-      await updatePost(postIdToEdit, values.title, values.content);
-      handleClose();
-    }
+    await updatePost(postId, values.title, values.content);
+    handleClose();
+    fetchPosts();
   };
 
   return (
@@ -108,7 +99,11 @@ export default function EditDialogAdmin() {
         <DialogContent dividers>
           <CreatePostForm
             onSubmit={handleSubmit}
-            post={post}
+            post={{
+              _id: postId,
+              title: currentTitle,
+              content: currentContent,
+            }}
             isEditing={true}
           />
         </DialogContent>

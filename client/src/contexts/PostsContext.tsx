@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { User } from "../hooks/useUsers";
 
 interface Post {
@@ -12,10 +18,11 @@ interface Post {
 interface PostsContextData {
   posts: Post[];
   fetchPosts: () => void;
+  updatePost: (id: string, title: string, content: string) => Promise<void>;
 }
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const PostsContext = createContext<PostsContextData | undefined>(undefined);
@@ -45,12 +52,35 @@ export const PostsProvider = ({ children }: Props) => {
     }
   }, []);
 
+  const updatePost = useCallback(
+    async (id: string, title: string, content: string) => {
+      try {
+        const response = await fetch(`/api/posts/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, content }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update post");
+        }
+        // Fetch posts after updating a post
+        fetchPosts();
+      } catch (error) {
+        console.error("Error updating post:", error);
+      }
+    },
+    [fetchPosts]
+  );
+
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
 
   return (
-    <PostsContext.Provider value={{ posts, fetchPosts }}>
+    <PostsContext.Provider value={{ posts, fetchPosts, updatePost }}>
       {children}
     </PostsContext.Provider>
   );
