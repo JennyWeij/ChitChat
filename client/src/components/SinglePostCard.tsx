@@ -6,6 +6,7 @@ import { theme } from "../theme";
 import EditDeleteButtons from "./EditDeleteButtons";
 
 interface Props {
+  id: string;
   name: string;
   timestamp: string;
   title: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function SinglePostCard({
+  id,
   name,
   timestamp,
   title,
@@ -86,7 +88,7 @@ export default function SinglePostCard({
           </Typography>
         </CardContent>
       </Card>
-      {showEditDeleteButtons && <EditDeleteButtons />}
+      {showEditDeleteButtons && <EditDeleteButtons {...{ id }} />}
     </Box>
   );
 }

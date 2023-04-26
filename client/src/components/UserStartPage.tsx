@@ -71,6 +71,7 @@ export default function UserStartPage() {
             .map((post) => (
               <SinglePostCard
                 key={post._id}
+                id={post._id}
                 name={post.author?.username || "Missing user"}
                 timestamp={post.createdAt}
                 title={post.title}
@@ -114,5 +115,5 @@ const formBackground = {
   padding: "1rem 2rem",
   borderRadius: "35px",
   margin: "1rem auto",
-  textAlign: "start" ,
+  textAlign: "start",
 };
