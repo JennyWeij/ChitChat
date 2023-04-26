@@ -11,6 +11,7 @@ import { themeAdmin } from "../theme";
 import EditDeleteButtons from "./EditDeleteButtons";
 
 interface Props {
+  id: string;
   name: string;
   timestamp: string;
   title: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export default function AdminSinglePost({
+  id,
   name,
   timestamp,
   title,
@@ -59,7 +61,7 @@ export default function AdminSinglePost({
             </Box>
           </CardContent>
         </Card>
-        <EditDeleteButtons />
+        <EditDeleteButtons {...{ id }}/>
       </Box>
     </ThemeProvider>
   );
