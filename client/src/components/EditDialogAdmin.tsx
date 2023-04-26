@@ -6,7 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
+import { useEffect, useState } from "react";
+import { usePostEdit } from "../contexts/PostEditContext";
 import CreatePostForm from "./CreatePostForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -23,6 +24,7 @@ export interface DialogTitleProps {
   children?: React.ReactNode;
   onClose: () => void;
 }
+
 
 function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
@@ -49,14 +51,34 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 }
 
 export default function EditDialogAdmin() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [requestedOpen, setRequestedOpen] = useState(false);
+  const { postIdToEdit, fetchPost, post, loading } = usePostEdit();
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (post && !loading) {
+      setOpen(true);
+    } else {
+      setRequestedOpen(true);
+    }
   };
+
   const handleClose = () => {
     setOpen(false);
+    setRequestedOpen(false);
   };
+
+  useEffect(() => {
+    if (postIdToEdit) {
+      fetchPost(postIdToEdit);
+    }
+  }, [postIdToEdit, fetchPost]);
+
+  useEffect(() => {
+    if (requestedOpen && postIdToEdit && !loading && post) {
+      setOpen(true);
+    }
+  }, [requestedOpen, postIdToEdit, loading, post]);
 
   return (
     <div>
@@ -73,14 +95,14 @@ export default function EditDialogAdmin() {
           Edit post
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <CreatePostForm
-            onSubmit={function (values: {
-              title: string;
-              content: string;
-            }): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+        <CreatePostForm
+          onSubmit={(values) => {
+            console.log(values);
+            // Handle form submission
+          }}
+          post={post}
+          isEditing={true}
+        />
         </DialogContent>
         <DialogActions>
           {/* <Button autoFocus onClick={handleClose}>

@@ -1,6 +1,7 @@
 import { Box, Button, InputLabel, TextField } from "@mui/material";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { Post } from "../contexts/PostEditContext";
 import { theme } from "../theme";
 
 const validationSchema = Yup.object().shape({
@@ -10,15 +11,17 @@ const validationSchema = Yup.object().shape({
 
 interface Props {
   onSubmit: (values: { title: string; content: string }) => void;
+  post?: Post | null;
+  isEditing: boolean; 
 }
 
-export default function CreatePostForm({ onSubmit }: Props) {
+export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
   
   return (
     <Formik
       initialValues={{
-        title: "",
-        content: "",
+        title: isEditing && post ? post.title : "",
+        content: isEditing && post ? post.content : "",
       }}
       validationSchema={validationSchema}
       onSubmit={onSubmit}

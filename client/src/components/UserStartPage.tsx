@@ -50,7 +50,7 @@ export default function UserStartPage() {
       </Typography>
 
       <Box sx={formBackground}>
-        <CreatePostForm onSubmit={handleCreatePost} />
+        <CreatePostForm onSubmit={handleCreatePost} isEditing={false}/>
       </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Latest posts</Typography>

@@ -1,4 +1,5 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
+import { usePostEdit } from "../contexts/PostEditContext";
 import AlertDialog from "./AlertDialog";
 import EditDialogAdmin from "./EditDialogAdmin";
 
@@ -8,10 +9,17 @@ interface Props {
 
 export default function EditDeleteButtons({ id }: Props) {
   const theme = useTheme();
+  const { setPostIdToEdit } = usePostEdit();
+
+  const handleEditClick = () => {
+    setPostIdToEdit(id);
+  };
 
   return (
     <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
-      <EditDialogAdmin />
+      <Button onClick={handleEditClick}>
+      <EditDialogAdmin/>
+      </Button>
       <AlertDialog {...{ id }} />
     </Box>
   );

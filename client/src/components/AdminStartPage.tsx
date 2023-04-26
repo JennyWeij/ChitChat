@@ -57,7 +57,7 @@ export default function AdminPage() {
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={formBackground}>
-          <CreatePostForm onSubmit={handleCreatePost} />
+        <CreatePostForm onSubmit={handleCreatePost} isEditing={false}/>
         </Box>
         <Box sx={wallContainer}>
           <Typography variant="h2">All posts</Typography>
