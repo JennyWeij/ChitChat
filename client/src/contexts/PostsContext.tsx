@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { User } from "../hooks/useUsers";
 
-
 interface Post {
   _id: string;
   author: User;
