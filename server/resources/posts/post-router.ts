@@ -1,5 +1,11 @@
 import express, { Request, Response } from "express";
+import * as yup from "yup";
 import PostModel from "./post-model";
+
+const postSchema = yup.object({
+  title: yup.string().required(),
+  content: yup.string().required(),
+});
 
 const postRouter = express.Router();
 
@@ -12,7 +18,7 @@ postRouter.get("/api/posts/:id", async (req: Request, res: Response) => {
   try {
     const post = await PostModel.findById(req.params.id);
     if (!post) {
-      return res.status(404).json("Post not found");
+      return res.status(404).json(JSON.stringify({ message: `Post ${req.params.id} not found` }));
     }
     res.json(post);
   } catch (err) {
@@ -42,15 +48,22 @@ postRouter.delete("/api/posts/:id", async (req, res) => {
     return res.status(401).json("You must log in to delete a post");
   }
   try {
-    const post = await PostModel.findByIdAndDelete(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     if (!post) {
-      return res.status(404).json("Post not found");
+      return res.status(404).json(JSON.stringify({ message: `Post ${req.params.id} not found` }));
     }
-    res.status(204).json("Post deleted successfully");
+    
+    if (post.author.toString() !== req.session.user._id.toString()) {
+      return res.status(403).json(JSON.stringify({ message: "You are not authorized to update this post" }));
+    }
+  
+    await PostModel.findByIdAndDelete(req.params.id);
+    res.status(204).json({ message: "Post deleted successfully" });
   } catch (err) {
-    res.status(500).json("Could not delete post");
+    res.status(500).json(JSON.stringify({ message: "Could not delete post " }));
   }
-});
+}
+);
 
 postRouter.put("/api/posts/:id", async (req: Request, res: Response) => {
   if (!req.session || !req.session.user || !req.session.user._id) {

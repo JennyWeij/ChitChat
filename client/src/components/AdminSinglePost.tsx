@@ -40,7 +40,12 @@ export default function AdminSinglePost({
               <Typography
                 sx={{
                   textAlign: "left",
-                  fontSize: "20px",
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.3rem",
+                    md: "1.3rem",
+                    lg: "1.3rem",
+                  },
                   fontWeight: "bold",
                   marginBottom: "1rem",
                 }}
@@ -61,7 +66,7 @@ export default function AdminSinglePost({
 }
 
 const cardStyling = {
-  maxWidth: "500px",
+  width: { xs: "22rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
   padding: "5px 15px",
   minWidth: "300px",
