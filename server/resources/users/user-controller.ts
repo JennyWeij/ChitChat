@@ -80,8 +80,7 @@ export async function getSession(req: Request, res: Response) {
   const sessionUser = req.session!.user;
 
   if (sessionUser) {
-    const { password: _, ...userWithoutPassword } = sessionUser;
-    res.status(200).json(userWithoutPassword);
+    res.status(200).json(sessionUser);
   } else {
     res.status(401).json({ message: "No active session" });
   }
@@ -103,8 +102,7 @@ export async function changeUserRole(req: Request, res: Response) {
     user.isAdmin = isAdmin;
     await user.save();
 
-    const { password: _, ...userWithoutPassword } = user.toObject();
-    res.status(200).json(userWithoutPassword);
+    res.status(200).json(user);
   } catch (error) {
     res
       .status(400)

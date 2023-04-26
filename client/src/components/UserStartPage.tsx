@@ -1,6 +1,6 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
+import { usePosts } from "../hooks/usePosts";
 import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 import SinglePostCard from "./SinglePostCard";
@@ -18,29 +18,39 @@ interface Post {
   content: string;
 }
 
-function handleCreatePost(values: { content: string }) {
-  console.log(values);
-}
-
 export default function UserStartPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { posts, fetchPosts } = usePosts();
 
-  async function fetchData() {
+  async function createPost(values: { title: string; content: string }) {
     try {
-      const postsResponse = await fetch("/api/posts");
-      if (!postsResponse.ok) {
-        throw new Error("Network response was not ok");
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      console.log("Response from server:", response);
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
       }
-      const postsData = await postsResponse.json();
-      setPosts(postsData);
+
+      return await response.json();
     } catch (error) {
-      console.log("Error fetching data:", error);
+      console.error("Error creating post:", error);
     }
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  async function handleCreatePost(values: { title: string; content: string }) {
+    console.log("handleCreatePost called with values:", values);
+    const newPost = await createPost(values);
+    if (newPost) {
+      fetchPosts();
+    }
+  }
 
   return (
     <Box sx={{ textAlign: "center" }}>
@@ -89,6 +99,7 @@ const dividerStyling = {
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
+  width: { xs: "18rem", sm: "28rem", md: "30rem", lg: "32rem" },
   gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
   padding: "2rem 6rem",
@@ -103,4 +114,5 @@ const formBackground = {
   padding: "1rem 2rem",
   borderRadius: "35px",
   margin: "1rem auto",
+  textAlign: "start" ,
 };
