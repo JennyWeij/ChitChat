@@ -1,7 +1,7 @@
-import { Box, InputLabel, TextField } from "@mui/material";
-import { useFormik } from "formik";
+import { Box, Button, InputLabel, TextField } from "@mui/material";
+import { Field, FieldProps, Form, Formik } from "formik";
 import * as Yup from "yup";
-import TextButton from "./TextButton";
+import { theme } from "../theme";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Required"),
@@ -13,58 +13,58 @@ interface Props {
 }
 
 export default function CreatePostForm({ onSubmit }: Props) {
-  const formik = useFormik({
-    initialValues: {
-      title: "",
-      content: "",
-    },
-    validationSchema,
-    onSubmit,
-  });
-
+  
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Box sx={formContainer}>
-        {/* <Typography variant="h2">Create a new post</Typography> */}
-        {/* <Box sx={formBackground}> */}
-        <Box sx={inputRow}>
-          <InputLabel htmlFor="title">Title</InputLabel>
-          <TextField
-            sx={textField}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            id="title"
-            name="title"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={Boolean(formik.errors.title && formik.touched.title)}
-          />
-          {/* </Box> */}
-          <Box sx={inputRow}>
-            <InputLabel htmlFor="content">Content</InputLabel>
-            <TextField
-              sx={textField}
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              id="content"
-              name="content"
-              multiline
-              rows={3}
-              value={formik.values.content}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={Boolean(formik.errors.content && formik.touched.content)}
-            />
+    <Formik
+      initialValues={{
+        title: "",
+        content: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <Box sx={formContainer}>
+            <Box sx={inputRow}>
+              <InputLabel htmlFor="title">Title</InputLabel>
+              <Field name="title">
+                {({ field }: FieldProps) => (
+                  <TextField
+                    sx={textField}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    {...field}
+                    error={touched.title && !!errors.title}
+                  />
+                )}
+              </Field>
+            </Box>
+            <Box sx={inputRow}>
+              <InputLabel htmlFor="content">Content</InputLabel>
+              <Field name="content">
+                {({ field }: FieldProps) => (
+                  <TextField
+                    sx={textField}
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    multiline
+                    rows={3}
+                    {...field}
+                    error={touched.content && !!errors.content}
+                  />
+                )}
+              </Field>
+            </Box>
+            <Box sx={buttonContainer}>
+              <Button type="submit" sx={styledButtonDark}>Posta</Button>
+            </Box>
           </Box>
-          <Box sx={buttonContainer}>
-            <TextButton mode="dark">Post</TextButton>
-          </Box>
-        </Box>
-      </Box>
-    </form>
+        </Form>
+      )}
+    </Formik>
   );
 }
 
@@ -101,4 +101,20 @@ const inputRow = {
 const textField = {
   marginLeft: 0,
   marginTop: 0,
+};
+
+const styledButtonDark = {
+  borderStyle: "solid",
+  borderRadius: "20px",
+  borderWidth: "1px",
+  borderColor: theme.palette.darktext.main,
+  paddingTop: "0.2rem",
+  paddingBottom: "0.2rem",
+  color: theme.palette.primary.main,
+  backgroundColor: theme.palette.darktext.main,
+  "&:hover": {
+    color: theme.palette.darktext.main,
+    backgroundColor: theme.palette.primary.main,
+    boxShadow: "none",
+  },
 };

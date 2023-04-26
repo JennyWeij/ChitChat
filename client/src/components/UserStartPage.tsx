@@ -18,10 +18,6 @@ interface Post {
   content: string;
 }
 
-function handleCreatePost(values: { content: string }) {
-  console.log(values);
-}
-
 export default function UserStartPage() {
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -42,9 +38,43 @@ export default function UserStartPage() {
     fetchData();
   }, []);
 
+  async function createPost(values: { title: string; content: string }) {
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      console.log("Response from server:", response);
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  }
+
+  async function handleCreatePost(values: { title: string; content: string }) {
+    console.log("handleCreatePost called with values:", values);
+    const newPost = await createPost(values);
+    if (newPost) {
+      setPosts((prevPosts) => [newPost, ...prevPosts]);
+    }
+  }
+
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography sx={{ marginTop: "2rem" }} variant="h2">
+      <Typography
+        sx={{ marginTop: "2rem" }}
+        variant="h2"
+      >
         Create a new post
       </Typography>
 
