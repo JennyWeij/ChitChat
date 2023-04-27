@@ -1,5 +1,6 @@
-import { Box, Button, InputLabel, TextField } from "@mui/material";
+import { Box, Button, InputLabel, Snackbar, TextField } from "@mui/material";
 import { Field, FieldProps, Form, Formik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 import { theme } from "../theme";
 
@@ -18,8 +19,13 @@ interface Props {
   isEditing: boolean; 
 }
 
-export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
-  
+export default function CreatePostForm({ onSubmit }: Props) {
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
+  const handleSnackbarClose = () => {
+    setShowSnackbar(false);
+  };
+
   return (
     <Formik
       initialValues={{
@@ -27,7 +33,11 @@ export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
         content: isEditing && post ? post.content : "",
       }}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={(values, { resetForm }) => {
+        onSubmit(values);
+        resetForm();
+        setShowSnackbar(true);
+      }}
     >
       {({ errors, touched }) => (
         <Form>
@@ -65,9 +75,17 @@ export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
               </Field>
             </Box>
             <Box sx={buttonContainer}>
-              <Button type="submit" sx={styledButtonDark}>Posta</Button>
+              <Button type="submit" sx={styledButtonDark}>
+                Post
+              </Button>
             </Box>
           </Box>
+          <Snackbar
+            open={showSnackbar}
+            onClose={handleSnackbarClose}
+            message="You posted a new post!"
+            autoHideDuration={3000}
+          />
         </Form>
       )}
     </Formik>
