@@ -5,7 +5,7 @@ import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
 
 export default function PublicStartPage() {
-  const { posts, fetchPosts } = usePosts();  
+  const { posts, fetchPosts } = usePosts();
 
   return (
     <Box>
@@ -49,6 +49,8 @@ const buttonContainer = {
 const wallContainer = {
   display: "flex",
   marginTop: "3rem",
+  padding: "2rem 6rem",
+  width: { xs: "15rem", sm: "20rem", md: "30rem", lg: "32rem" },
   alignItems: "center",
   flexDirection: "column",
 };
@@ -62,7 +64,7 @@ const dividerStyling = {
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
-  width: { xs: "15rem", sm: "28rem", md: "30rem", lg: "32rem" },
+  width: { xs: "15rem", sm: "20rem", md: "30rem", lg: "32rem" },
   gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
   padding: "2rem 6rem",
