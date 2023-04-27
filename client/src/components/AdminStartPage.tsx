@@ -96,7 +96,7 @@ const wallBackground = {
   padding: "3rem ",
   borderRadius: "35px",
   "@media (max-width: 600px)": {
-    padding: "1rem ",
+    padding: "0.5rem ",
   },
 };
 

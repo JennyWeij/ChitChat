@@ -70,8 +70,6 @@ export default function AdminSinglePost({
 const cardStyling = {
   width: { xs: "20rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
-  // padding: "5px 15px",
-  // minWidth: "300px",
 };
 
 const cardHeader = {
@@ -104,12 +102,6 @@ const timeStyling = {
   fontFamily: "Sulphur Point",
   fontSize: "20px",
 };
-
-// const contentStyle = {
-//   "@media (max-width: 600px)": {
-//     width: "100%",
-//   },
-// };
 
 const flexBox = {
   display: "flex",
