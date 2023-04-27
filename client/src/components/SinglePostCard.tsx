@@ -1,5 +1,12 @@
 import { PersonOutline } from "@mui/icons-material";
-import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { theme } from "../theme";
@@ -32,19 +39,28 @@ export default function SinglePostCard({
     minute: "2-digit",
   });
 
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box sx={flexBox}>
       <Card sx={cardStyling}>
         <CardContent>
-          <Box sx={cardHeader}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: isSmallScreen ? "column" : "row",
+              justifyContent: "space-between",
+              alignItems: "left",
+            }}
+          >
             <Box sx={nameAndIcon}>
               <PersonOutline sx={iconStyling} />
               <Typography
                 sx={{
                   fontSize: {
                     xs: "1rem",
-                    sm: "1.2rem",
-                    md: "1.3rem",
+                    sm: "1rem",
+                    md: "1rem",
                     lg: "1.3rem",
                   },
                 }}
@@ -61,8 +77,8 @@ export default function SinglePostCard({
               textAlign: "left",
               fontSize: {
                 xs: "1rem",
-                sm: "1.3rem",
-                md: "1.3rem",
+                sm: "1.1rem",
+                md: "1.2rem",
                 lg: "1.3rem",
               },
               fontWeight: "bold",
@@ -96,15 +112,8 @@ export default function SinglePostCard({
 }
 
 const cardStyling = {
-  width: { xs: "16rem", sm: "25rem", md: "27rem", lg: "31rem" },
+  width: { xs: "15rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
-  padding: "5px 15px",
-};
-
-const cardHeader = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
 };
 
 const nameAndIcon = {
@@ -126,9 +135,14 @@ const dividerStyling = {
 const timeStyling = {
   color: theme.palette.lighttext.main,
   fontFamily: "Sulphur Point",
-  fontSize: { xs: "0.8rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
+  fontSize: { xs: "1rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
+  [theme.breakpoints.down("sm")]: {
+    display: "block",
+    marginTop: "0.5rem",
+  },
 };
 
 const flexBox = {
   display: "flex",
+  maxWidth: "100%",
 };

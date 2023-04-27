@@ -5,7 +5,7 @@ import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
 
 export default function PublicStartPage() {
-  const { posts, fetchPosts } = usePosts();  
+  const { posts, fetchPosts } = usePosts();
 
   return (
     <Box>
@@ -62,9 +62,8 @@ const dividerStyling = {
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
-  width: { xs: "15rem", sm: "28rem", md: "30rem", lg: "32rem" },
   gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
-  padding: "2rem 6rem",
+  padding: "3rem ",
   borderRadius: "35px",
 };
