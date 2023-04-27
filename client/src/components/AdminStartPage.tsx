@@ -1,7 +1,6 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { useEffect } from "react";
 
-
 import { usePosts } from "../contexts/PostsContext";
 import { themeAdmin } from "../theme";
 import AdminSinglePost from "./AdminSinglePost";
@@ -57,7 +56,10 @@ export default function AdminPage() {
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={formBackground}>
-          <CreatePostForm onSubmit={handleCreatePost} />
+          <CreatePostForm
+            onSubmit={handleCreatePost}
+            isEditing={false}
+          />
         </Box>
         <Box sx={wallContainer}>
           <Typography variant="h2">All posts</Typography>

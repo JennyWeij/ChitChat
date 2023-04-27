@@ -6,7 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
+import { useState } from "react";
+import { usePosts } from "../contexts/PostsContext";
 import CreatePostForm from "./CreatePostForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -24,11 +25,20 @@ export interface DialogTitleProps {
   onClose: () => void;
 }
 
+interface EditDialogAdminProps {
+  postId: string;
+  currentTitle: string;
+  currentContent: string;
+}
+
 function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <DialogTitle
+      sx={{ m: 0, p: 2 }}
+      {...other}
+    >
       {children}
       {onClose ? (
         <IconButton
@@ -48,8 +58,13 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export default function EditDialogAdmin() {
-  const [open, setOpen] = React.useState(false);
+export default function EditDialogAdmin({
+  postId,
+  currentTitle,
+  currentContent,
+}: EditDialogAdminProps) {
+  const [open, setOpen] = useState(false);
+  const { posts, fetchPosts, updatePost } = usePosts();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,9 +73,18 @@ export default function EditDialogAdmin() {
     setOpen(false);
   };
 
+  const handleSubmit = async (values: { title: string; content: string }) => {
+    await updatePost(postId, values.title, values.content);
+    handleClose();
+    fetchPosts();
+  };
+
   return (
     <div>
-      <EditNote sx={editIcon} onClick={handleClickOpen} />
+      <EditNote
+        sx={editIcon}
+        onClick={handleClickOpen}
+      />
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -74,12 +98,13 @@ export default function EditDialogAdmin() {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <CreatePostForm
-            onSubmit={function (values: {
-              title: string;
-              content: string;
-            }): void {
-              throw new Error("Function not implemented.");
+            onSubmit={handleSubmit}
+            post={{
+              _id: postId,
+              title: currentTitle,
+              content: currentContent,
             }}
+            isEditing={true}
           />
         </DialogContent>
         <DialogActions>

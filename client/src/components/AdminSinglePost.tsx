@@ -61,7 +61,7 @@ export default function AdminSinglePost({
             </Box>
           </CardContent>
         </Card>
-        <EditDeleteButtons {...{ id }}/>
+        <EditDeleteButtons id={id} title={title} content={content}/>
       </Box>
     </ThemeProvider>
   );
