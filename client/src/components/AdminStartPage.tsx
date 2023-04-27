@@ -56,10 +56,7 @@ export default function AdminPage() {
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={formBackground}>
-          <CreatePostForm
-            onSubmit={handleCreatePost}
-            isEditing={false}
-          />
+          <CreatePostForm onSubmit={handleCreatePost} isEditing={false} />
         </Box>
         <Box sx={wallContainer}>
           <Typography variant="h2">All posts</Typography>
@@ -91,14 +88,16 @@ const wallContainer = {
   alignItems: "center",
   flexDirection: "column",
 };
-
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
   gap: "2rem",
   backgroundColor: themeAdmin.palette.secondary.main,
-  padding: "2rem 6rem",
+  padding: "3rem ",
   borderRadius: "35px",
+  "@media (max-width: 600px)": {
+    padding: "0.5rem ",
+  },
 };
 
 const dividerStyling = {

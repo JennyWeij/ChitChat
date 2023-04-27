@@ -18,7 +18,7 @@ export default function Header() {
       <Box sx={buttonWrapperStyling}>
         {isAdmin && (
           <TextButton to="/admincontrolpage" mode="light">
-            Admin
+            Control
           </TextButton>
         )}
         <LoginLogoutButton />
@@ -36,6 +36,10 @@ const headerBoxStyling = {
   justifyContent: "space-between",
   padding: "0 2rem",
   position: "absolute",
+  "@media (max-width: 750px)": {
+    display: "flex",
+    flexDirection: "column",
+  },
 };
 
 const logoStyling = {
