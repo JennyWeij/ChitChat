@@ -74,7 +74,7 @@ export default function AlertDialog(props: Post) {
 }
 
 const buttonText = {
-  color: "tomato",
+  color: "#F95858",
 };
 const buttonTextCancel = {
   color: theme.palette.darktext.main,
@@ -82,7 +82,7 @@ const buttonTextCancel = {
 
 const deleteIcon = {
   "&:hover": {
-    color: "tomato",
+    color: "#F95858",
 
     boxShadow: "none",
   },
