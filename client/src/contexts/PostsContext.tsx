@@ -66,7 +66,7 @@ export const PostsProvider = ({ children }: Props) => {
         if (!response.ok) {
           throw new Error("Failed to update post");
         }
-        // Fetch posts after updating a post
+        // Hämta alla efter uppdatering
         fetchPosts();
       } catch (error) {
         console.error("Error updating post:", error);
