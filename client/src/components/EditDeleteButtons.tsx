@@ -35,7 +35,7 @@ export default function EditDeleteButtons({ id, title, content }: Props) {
 const editDelete = {
   display: "flex",
   justifyContent: "center",
-  flexDirection: "column",
+  flexDirection: "row",
   marginLeft: "0.4rem",
   gap: "1rem",
   marginTop: "1.5rem",

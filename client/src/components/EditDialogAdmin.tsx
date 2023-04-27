@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { usePosts } from "../contexts/PostsContext";
+import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -81,7 +82,13 @@ export default function EditDialogAdmin({
     const post = posts.find((p) => p._id === postId);
     console.log(post);
     if (post) {
-      await updatePost(postId, post.author, values.title, values.content, post.createdAt);
+      await updatePost(
+        postId,
+        post.author,
+        values.title,
+        values.content,
+        post.createdAt
+      );
     }
     handleClose();
     fetchPosts();
@@ -129,6 +136,7 @@ export default function EditDialogAdmin({
 }
 
 const editIcon = {
+  color: theme.palette.darktext.main,
   "&:hover": {
     color: "white",
     boxShadow: "none",
