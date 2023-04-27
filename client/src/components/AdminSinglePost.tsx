@@ -38,7 +38,7 @@ export default function AdminSinglePost({
               <Typography sx={timeStyling}>{timestamp}</Typography>
             </Box>
             <Divider sx={dividerStyling} />
-            <Box sx={contentStyle}>
+            <Box>
               <Typography
                 sx={{
                   textAlign: "left",
@@ -61,17 +61,17 @@ export default function AdminSinglePost({
             </Box>
           </CardContent>
         </Card>
-        <EditDeleteButtons id={id} title={title} content={content}/>
+        <EditDeleteButtons id={id} title={title} content={content} />
       </Box>
     </ThemeProvider>
   );
 }
 
 const cardStyling = {
-  width: { xs: "22rem", sm: "25rem", md: "27rem", lg: "31rem" },
+  width: { xs: "20rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
-  padding: "5px 15px",
-  minWidth: "300px",
+  // padding: "5px 15px",
+  // minWidth: "300px",
 };
 
 const cardHeader = {
@@ -105,11 +105,11 @@ const timeStyling = {
   fontSize: "20px",
 };
 
-const contentStyle = {
-  "@media (max-width: 600px)": {
-    width: "100%",
-  },
-};
+// const contentStyle = {
+//   "@media (max-width: 600px)": {
+//     width: "100%",
+//   },
+// };
 
 const flexBox = {
   display: "flex",
