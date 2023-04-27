@@ -111,11 +111,7 @@ export default function EditDialogAdmin({
             isEditing={true}
           />
         </DialogContent>
-        <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button> */}
-        </DialogActions>
+        <DialogActions></DialogActions>
       </BootstrapDialog>
     </div>
   );

@@ -10,23 +10,14 @@ export default function Header() {
   return (
     <AppBar sx={headerBoxStyling}>
       <Box sx={buttonWrapperStyling}></Box>
-      <Link
-        to="/"
-        style={linkStyle}
-      >
-        <Typography
-          variant="h1"
-          sx={logoStyling}
-        >
+      <Link to="/" style={linkStyle}>
+        <Typography variant="h1" sx={logoStyling}>
           ChitChat
         </Typography>
       </Link>
       <Box sx={buttonWrapperStyling}>
         {isAdmin && (
-          <TextButton
-            to="/admincontrolpage"
-            mode="light"
-          >
+          <TextButton to="/admincontrolpage" mode="light">
             Admin
           </TextButton>
         )}
@@ -44,6 +35,7 @@ const headerBoxStyling = {
   alignItems: "center",
   justifyContent: "space-between",
   padding: "0 2rem",
+  position: "absolute",
 };
 
 const logoStyling = {

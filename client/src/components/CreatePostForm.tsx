@@ -88,16 +88,6 @@ const buttonContainer = {
   justifyContent: "flex-end",
 };
 
-// const formBackground = {
-//   display: "flex",
-//   flexDirection: "column",
-//   width: "80%",
-//   backgroundColor: theme.palette.secondary.main,
-//   padding: "1rem 2rem",
-//   borderRadius: "35px",
-//   margin: "1rem",
-// };
-
 const inputRow = {
   display: "flex",
   flexDirection: "column",

@@ -14,7 +14,11 @@ export default function EditDeleteButtons({ id, title, content }: Props) {
   return (
     <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
       <Button>
-      <EditDialogAdmin postId={id} currentTitle={title} currentContent={content}/>
+        <EditDialogAdmin
+          postId={id}
+          currentTitle={title}
+          currentContent={content}
+        />
       </Button>
       <AlertDialog {...{ id }} />
     </Box>
