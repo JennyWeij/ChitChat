@@ -35,10 +35,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle
-      sx={{ m: 0, p: 2 }}
-      {...other}
-    >
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -81,14 +78,21 @@ export default function EditDialogAdmin({
 
   return (
     <div>
-      <EditNote
-        sx={editIcon}
-        onClick={handleClickOpen}
-      />
+      <EditNote sx={editIcon} onClick={handleClickOpen} />
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        sx={{
+          "& .MuiDialogContent-root": {
+            width: "25rem",
+          },
+          "@media (max-width: 550px)": {
+            "& .MuiDialogContent-root": {
+              width: "15rem",
+            },
+          },
+        }}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"

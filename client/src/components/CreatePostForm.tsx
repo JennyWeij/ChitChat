@@ -15,11 +15,10 @@ interface Props {
     title: string;
     content: string;
   };
-  isEditing: boolean; 
+  isEditing: boolean;
 }
 
 export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
-  
   return (
     <Formik
       initialValues={{
@@ -65,7 +64,9 @@ export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
               </Field>
             </Box>
             <Box sx={buttonContainer}>
-              <Button type="submit" sx={styledButtonDark}>Posta</Button>
+              <Button type="submit" sx={styledButtonDark}>
+                Post
+              </Button>
             </Box>
           </Box>
         </Form>
