@@ -10,15 +10,21 @@ const validationSchema = Yup.object().shape({
 
 interface Props {
   onSubmit: (values: { title: string; content: string }) => void;
+  post?: {
+    _id: string;
+    title: string;
+    content: string;
+  };
+  isEditing: boolean; 
 }
 
-export default function CreatePostForm({ onSubmit }: Props) {
+export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
   
   return (
     <Formik
       initialValues={{
-        title: "",
-        content: "",
+        title: isEditing && post ? post.title : "",
+        content: isEditing && post ? post.content : "",
       }}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
