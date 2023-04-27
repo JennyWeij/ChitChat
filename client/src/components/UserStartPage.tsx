@@ -1,6 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
 
-
 import { usePosts } from "../contexts/PostsContext";
 import { theme } from "../theme";
 import CreatePostForm from "./CreatePostForm";
@@ -42,15 +41,12 @@ export default function UserStartPage() {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography
-        sx={{ marginTop: "2rem" }}
-        variant="h2"
-      >
+      <Typography sx={{ marginTop: "2rem" }} variant="h2">
         Create a new post
       </Typography>
 
       <Box sx={formBackground}>
-        <CreatePostForm onSubmit={handleCreatePost} isEditing={false}/>
+        <CreatePostForm onSubmit={handleCreatePost} isEditing={false} />
       </Box>
       <Box sx={wallContainer}>
         <Typography variant="h2">Latest posts</Typography>
@@ -91,10 +87,9 @@ const dividerStyling = {
 const wallBackground = {
   display: "flex",
   flexDirection: "column",
-  width: { xs: "18rem", sm: "28rem", md: "30rem", lg: "32rem" },
   gap: "2rem",
   backgroundColor: theme.palette.secondary.main,
-  padding: "2rem 6rem",
+  padding: "3rem ",
   borderRadius: "35px",
 };
 
