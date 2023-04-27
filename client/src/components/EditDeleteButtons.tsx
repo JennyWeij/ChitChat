@@ -12,7 +12,12 @@ export default function EditDeleteButtons({ id, title, content }: Props) {
   const theme = useTheme();
 
   return (
-    <Box sx={{ ...editDelete, color: theme.palette.darktext.main }}>
+    <Box
+      sx={{
+        ...editDelete,
+        color: theme.palette.darktext.main,
+      }}
+    >
       <Button>
         <EditDialogAdmin
           postId={id}
@@ -34,8 +39,9 @@ export default function EditDeleteButtons({ id, title, content }: Props) {
 
 const editDelete = {
   display: "flex",
+  alignItems: "baseline",
   justifyContent: "center",
-  flexDirection: "column",
+  flexDirection: "row",
   marginLeft: "0.4rem",
   gap: "1rem",
   marginTop: "1.5rem",

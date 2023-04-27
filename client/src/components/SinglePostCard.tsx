@@ -137,7 +137,8 @@ const timeStyling = {
   fontFamily: "Sulphur Point",
   fontSize: { xs: "1rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
   [theme.breakpoints.down("sm")]: {
-    display: "block",
+    display: "flex",
+    justifyContent: "left",
     marginTop: "0.5rem",
   },
 };
@@ -145,4 +146,6 @@ const timeStyling = {
 const flexBox = {
   display: "flex",
   maxWidth: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
 };

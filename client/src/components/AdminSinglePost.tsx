@@ -25,6 +25,14 @@ export default function AdminSinglePost({
   title,
   content,
 }: Props) {
+  const formattedTimestamp = new Date(timestamp).toLocaleString("sv-SE", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <ThemeProvider theme={themeAdmin}>
       <Box sx={flexBox}>
@@ -35,7 +43,7 @@ export default function AdminSinglePost({
                 <PersonOutline sx={iconStyling} />
                 <Typography variant="h5">{name}</Typography>
               </Box>
-              <Typography sx={timeStyling}>{timestamp}</Typography>
+              <Typography sx={timeStyling}>{formattedTimestamp}</Typography>
             </Box>
             <Divider sx={dividerStyling} />
             <Box>
