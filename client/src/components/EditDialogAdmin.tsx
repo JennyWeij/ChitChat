@@ -138,7 +138,7 @@ export default function EditDialogAdmin({
 const editIcon = {
   color: theme.palette.darktext.main,
   "&:hover": {
-    color: "white",
+    color: theme.palette.white.main,
     boxShadow: "none",
   },
 };
