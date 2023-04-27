@@ -74,7 +74,7 @@ export default function AdminControlPanel() {
               )
           )}
 
-          {/* Reguler user */}
+          {/* Regular user */}
           {regularUsers.map((user, index) => (
             <AdminControlCard
               key={index}
