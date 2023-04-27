@@ -1,10 +1,12 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
+import { useAuth } from "../contexts/AuthContext";
 import { useUsers } from "../hooks/useUsers";
 import { themeAdmin } from "../theme";
 import AdminControlCard from "./AdminControlCard";
 
 export default function AdminControlPanel() {
   const { users, fetchUsers } = useUsers();
+  const { username } = useAuth();
 
   const adminUsers = users.filter((user) => user.isAdmin);
   const regularUsers = users.filter((user) => !user.isAdmin);
@@ -58,18 +60,21 @@ export default function AdminControlPanel() {
           <Divider sx={dividerStyling} />
 
           {/* Admin user */}
-          {adminUsers.map((user, index) => (
-            <AdminControlCard
-              key={index}
-              name={user.username}
-              isAdmin={user.isAdmin}
-              userId={user._id}
-              promoteUser={promoteUser}
-              deleteUser={deleteUser}
-            />
-          ))}
+          {adminUsers.map(
+            (user, index) =>
+              user.username !== username && (
+                <AdminControlCard
+                  key={index}
+                  name={user.username}
+                  isAdmin={user.isAdmin}
+                  userId={user._id}
+                  promoteUser={promoteUser}
+                  deleteUser={deleteUser}
+                />
+              )
+          )}
 
-          {/* reguler user */}
+          {/* Reguler user */}
           {regularUsers.map((user, index) => (
             <AdminControlCard
               key={index}
