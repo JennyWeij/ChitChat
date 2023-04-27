@@ -10,11 +10,11 @@ const postSchema = yup.object({
 const validationSchema = yup.object().shape({
   // username: yup.string().required().min(3).strict(),
   // password: yup.string().required().min(6).strict(), 
-  _id: yup.string().required().min(5).strict(),
-  title: yup.string().required().max(40).strict(),
-  author: yup.string().required().min(3).strict(),
-  content: yup.string().required().min(1).strict(),
-  createdAt: yup.string().required().max(20).strict(),
+  _id: yup.string().required().strict(),
+  title: yup.string().required().strict(),
+  author: yup.string().required().strict(),
+  content: yup.string().required().strict(),
+  createdAt: yup.string().required().strict(),
 });
 
 const postRouter = express.Router();
@@ -124,8 +124,9 @@ postRouter.put("/api/posts/:id", async (req: Request, res: Response) => {
     post.content = content;
     await post.save();
 
-    res.status(201).json(JSON.stringify(post));
+    res.status(200).json(post);
   } catch (error) {
+    console.log('Error:', error);
     if (error instanceof yup.ValidationError) {
       return res.status(400).json(JSON.stringify({ message: error.message }));
     }
