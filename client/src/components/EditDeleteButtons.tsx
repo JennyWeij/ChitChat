@@ -18,6 +18,13 @@ export default function EditDeleteButtons({ id, title, content }: Props) {
           postId={id}
           currentTitle={title}
           currentContent={content}
+          currentPost={{
+            _id: "",
+            author: "",
+            content: "",
+            createdAt: "",
+            title: "",
+          }}
         />
       </Button>
       <AlertDialog {...{ id }} />
