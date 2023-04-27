@@ -88,7 +88,9 @@ export default function SinglePostCard({
           </Typography>
         </CardContent>
       </Card>
-      {showEditDeleteButtons && <EditDeleteButtons id={id} title={title} content={content} />}
+      {showEditDeleteButtons && (
+        <EditDeleteButtons id={id} title={title} content={content} />
+      )}
     </Box>
   );
 }

@@ -4,7 +4,7 @@ import PostModel from "./post-model";
 
 const postSchema = yup.object({
   title: yup.string().required().max(40).strict(),
-  content: yup.string().required().max(125).strict(),
+  content: yup.string().required().max(200).strict(),
 });
 
 const validationSchema = yup.object().shape({
