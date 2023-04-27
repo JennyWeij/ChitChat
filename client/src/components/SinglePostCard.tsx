@@ -58,7 +58,7 @@ export default function SinglePostCard({
               <Typography
                 sx={{
                   fontSize: {
-                    xs: "0.8rem",
+                    xs: "1rem",
                     sm: "1rem",
                     md: "1rem",
                     lg: "1.3rem",
@@ -76,8 +76,8 @@ export default function SinglePostCard({
             sx={{
               textAlign: "left",
               fontSize: {
-                xs: "0.8rem",
-                sm: "1.2rem",
+                xs: "1rem",
+                sm: "1.1rem",
                 md: "1.2rem",
                 lg: "1.3rem",
               },
@@ -144,7 +144,6 @@ const timeStyling = {
   color: theme.palette.lighttext.main,
   fontFamily: "Sulphur Point",
   fontSize: { xs: "1rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
-  textAlign: "right",
   [theme.breakpoints.down("sm")]: {
     display: "block",
     marginTop: "0.5rem",
