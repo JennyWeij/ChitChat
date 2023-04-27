@@ -10,22 +10,14 @@ const userRouter = express.Router()
 //Registrera ny användare
 .post("/api/users/register", registerUser)
 
-//Logga in (ej klar)
+//Logga in
 .post("/api/users/login", loginUser)
 
-//Logga ut (Bör nog vara .delete men testet vill inte)
-//.delete("/api/users/logout", logoutUser)
+//Logga ut 
 .post("/api/users/logout", logoutUser)
 
 //Hämta session
 .get("/api/users/session", getSession)
-
-//TODO
-//x spara inloggade användare (session, cookie) 
-//x logga ut ordentligt, inte bara i kontexten (delete)
-//ta emot id i kontexten?
-//x skicka tillbaka user-objekt utan att inkludera lösenordet (davids metod)
-//skicka ej med isAdmin, validera ?
 
 //-------------ADMIN-------------//
 
