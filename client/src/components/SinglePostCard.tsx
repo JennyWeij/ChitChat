@@ -134,12 +134,11 @@ const dividerStyling = {
 
 const timeStyling = {
   color: theme.palette.lighttext.main,
-  backgroundColor: "green",
   fontFamily: "Sulphur Point",
   fontSize: { xs: "1rem", sm: "1rem", md: "1.1rem", lg: "1.3rem" },
   [theme.breakpoints.down("sm")]: {
-    display: "block",
-    alignItems: "left",
+    display: "flex",
+    justifyContent: "left",
     marginTop: "0.5rem",
   },
 };
