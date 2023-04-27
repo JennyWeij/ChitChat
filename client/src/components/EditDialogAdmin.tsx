@@ -29,6 +29,13 @@ interface EditDialogAdminProps {
   postId: string;
   currentTitle: string;
   currentContent: string;
+  currentPost: {
+    _id: string;
+    author: string;
+    content: string;
+    createdAt: string;
+    title: string;
+  };
 }
 
 function BootstrapDialogTitle(props: DialogTitleProps) {
@@ -71,7 +78,11 @@ export default function EditDialogAdmin({
   };
 
   const handleSubmit = async (values: { title: string; content: string }) => {
-    await updatePost(postId, values.title, values.content);
+    const post = posts.find((p) => p._id === postId);
+    console.log(post);
+    if (post) {
+      await updatePost(postId, post.author, values.title, values.content, post.createdAt);
+    }
     handleClose();
     fetchPosts();
   };

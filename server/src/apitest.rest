@@ -32,8 +32,8 @@ Content-Type: application/json
 
 {
   "title": "Hello world",
-  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset"
-  
+  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. se of Letraset",
+  "author": "6446fcdb682a42931a1822fa"
 }
 
 ### Get all posts
@@ -56,10 +56,14 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/users/644273b3979df454b9353c9c
 
 ### PUT a post
-PUT http://localhost:3000/api/posts/6447b520e9a92ca45b05c146
+PUT http://localhost:3000/api/posts/644a3388fcf9b7590be23d76
 Content-Type: application/json
 
 {
-  "content": "New content here"
+  "_id": "644a3388fcf9b7590be23d76",
+  "title": "Hello world",
+  "author": "6447b520e9a92ca45b05c146",
+  "content": "New content here",
+  "createdAt": "2023-04-27T08:34:16.438Z"
 }
 

@@ -9,16 +9,22 @@ import { User } from "../hooks/useUsers";
 
 interface Post {
   _id: string;
-  author: User;
-  createdAt: string;
   title: string;
+  author: User;
   content: string;
+  createdAt: string;
 }
 
 interface PostsContextData {
   posts: Post[];
   fetchPosts: () => void;
-  updatePost: (id: string, title: string, content: string) => Promise<void>;
+  updatePost: (
+    id: string,
+    author: User,
+    title: string,
+    content: string,
+    createdAt: string
+  ) => Promise<void>;
 }
 
 interface Props {
@@ -53,14 +59,20 @@ export const PostsProvider = ({ children }: Props) => {
   }, []);
 
   const updatePost = useCallback(
-    async (id: string, title: string, content: string) => {
+    async (
+      id: string,
+      author: User,
+      title: string,
+      content: string,
+      createdAt: string
+    ) => {
       try {
         const response = await fetch(`/api/posts/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title, content }),
+          body: JSON.stringify({ _id: id, title, content, author: author._id, createdAt }),
         });
 
         if (!response.ok) {
