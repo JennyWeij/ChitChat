@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Field, FieldProps, Form, Formik } from "formik";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../contexts/AuthContext";
@@ -25,11 +26,14 @@ const validationSchema = Yup.object().shape({
 export default function LoginForm() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [loginError, setLoginError] = React.useState<string>(" ");
   const handleSubmit = async (values: FormValues) => {
     console.log("Form data:", values);
     const success = await login(values.username, values.password);
     if (success) {
       navigate("/");
+    } else {
+      setLoginError("Something went wrong. Please try again.");
     }
   };
 
