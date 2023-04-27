@@ -51,36 +51,36 @@ export default function AdminControlPanel() {
 
   return (
     <ThemeProvider theme={themeAdmin}>
-    <Box sx={{ textAlign: "center" }}>
-      <Typography sx={adminTitle}>ADMIN</Typography>
-      <Box sx={wallContainer}>
-        <Typography variant="h2">All posts</Typography>
-        <Divider sx={dividerStyling} />
+      <Box sx={{ textAlign: "center" }}>
+        <Typography sx={adminTitle}>ADMIN</Typography>
+        <Box sx={wallContainer}>
+          <Typography variant="h2">All users</Typography>
+          <Divider sx={dividerStyling} />
 
-      {/* Admin user */}
-      {adminUsers.map((user, index) => (
-        <AdminControlCard
-          key={index}
-          name={user.username}
-          isAdmin={user.isAdmin}
-          userId={user._id}
-          promoteUser={promoteUser}
-          deleteUser={deleteUser}
-        />
-      ))}
+          {/* Admin user */}
+          {adminUsers.map((user, index) => (
+            <AdminControlCard
+              key={index}
+              name={user.username}
+              isAdmin={user.isAdmin}
+              userId={user._id}
+              promoteUser={promoteUser}
+              deleteUser={deleteUser}
+            />
+          ))}
 
-      {/* reguler user */}
-      {regularUsers.map((user, index) => (
-        <AdminControlCard
-          key={index}
-          name={user.username}
-          isAdmin={user.isAdmin}
-          userId={user._id}
-          promoteUser={promoteUser}
-          deleteUser={deleteUser}
-        />
-      ))}
-           </Box>
+          {/* reguler user */}
+          {regularUsers.map((user, index) => (
+            <AdminControlCard
+              key={index}
+              name={user.username}
+              isAdmin={user.isAdmin}
+              userId={user._id}
+              promoteUser={promoteUser}
+              deleteUser={deleteUser}
+            />
+          ))}
+        </Box>
       </Box>
     </ThemeProvider>
   );
