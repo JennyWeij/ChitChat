@@ -5,8 +5,10 @@ import * as Yup from "yup";
 import { theme } from "../theme";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required("Required"),
-  content: Yup.string().required("Required"),
+  title: Yup.string().required("Title is required"),
+  content: Yup.string()
+    .required("Content is required")
+    .max(200, "Max 200 characters allowed"),
 });
 
 interface Props {
@@ -16,10 +18,10 @@ interface Props {
     title: string;
     content: string;
   };
-  isEditing: boolean; 
+  isEditing: boolean;
 }
 
-export default function CreatePostForm({ onSubmit }: Props) {
+export default function CreatePostForm({ onSubmit, post, isEditing }: Props) {
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleSnackbarClose = () => {
@@ -46,14 +48,19 @@ export default function CreatePostForm({ onSubmit }: Props) {
               <InputLabel htmlFor="title">Title</InputLabel>
               <Field name="title">
                 {({ field }: FieldProps) => (
-                  <TextField
-                    sx={textField}
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
-                    {...field}
-                    error={touched.title && !!errors.title}
-                  />
+                  <div>
+                    <TextField
+                      sx={textField}
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      {...field}
+                      error={touched.title && !!errors.title}
+                    />
+                    {touched.title && errors.title && (
+                      <div style={{ color: "red" }}>{errors.title}</div>
+                    )}
+                  </div>
                 )}
               </Field>
             </Box>
@@ -61,16 +68,25 @@ export default function CreatePostForm({ onSubmit }: Props) {
               <InputLabel htmlFor="content">Content</InputLabel>
               <Field name="content">
                 {({ field }: FieldProps) => (
-                  <TextField
-                    sx={textField}
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
-                    multiline
-                    rows={3}
-                    {...field}
-                    error={touched.content && !!errors.content}
-                  />
+                  <div>
+                    <TextField
+                      sx={textField}
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      multiline
+                      rows={3}
+                      {...field}
+                      error={touched.content && !!errors.content}
+                    />
+                    {touched.content && errors.content && (
+                      <div style={{ color: "red" }}>
+                        {errors.content.length === 200
+                          ? "Max 200 characters allowed"
+                          : errors.content}
+                      </div>
+                    )}
+                  </div>
                 )}
               </Field>
             </Box>
@@ -104,16 +120,6 @@ const buttonContainer = {
   width: "100%",
   justifyContent: "flex-end",
 };
-
-// const formBackground = {
-//   display: "flex",
-//   flexDirection: "column",
-//   width: "80%",
-//   backgroundColor: theme.palette.secondary.main,
-//   padding: "1rem 2rem",
-//   borderRadius: "35px",
-//   margin: "1rem",
-// };
 
 const inputRow = {
   display: "flex",
