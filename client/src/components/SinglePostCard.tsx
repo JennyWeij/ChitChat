@@ -112,17 +112,9 @@ export default function SinglePostCard({
 }
 
 const cardStyling = {
-  width: { xs: "25rem", sm: "25rem", md: "27rem", lg: "31rem" },
+  width: { xs: "15rem", sm: "25rem", md: "27rem", lg: "31rem" },
   borderRadius: "20px",
-  padding: "5px 15px",
 };
-
-// const cardHeader = {
-//   display: "flex",
-//   backgroundColor: "yellow",
-//   justifyContent: "space-between",
-//   alignItems: "center",
-// };
 
 const nameAndIcon = {
   display: "flex",
@@ -152,4 +144,5 @@ const timeStyling = {
 
 const flexBox = {
   display: "flex",
+  maxWidth: "100%",
 };
