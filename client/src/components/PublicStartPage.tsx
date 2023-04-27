@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { usePosts } from "../hooks/usePosts";
+import { usePosts } from "../contexts/PostsContext";
 import { theme } from "../theme";
 import SinglePostCard from "./SinglePostCard";
 import TextButton from "./TextButton";
@@ -27,6 +27,7 @@ export default function PublicStartPage() {
             .map((post) => (
               <SinglePostCard
                 key={post._id}
+                id={post._id}
                 name={post.author?.username || "Missing user"}
                 timestamp={post.createdAt}
                 title={post.title}

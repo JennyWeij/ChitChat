@@ -7,10 +7,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
-import { themeAdmin } from "../theme";
+import { usePosts } from "../contexts/PostsContext";
+import { theme, themeAdmin } from "../theme";
 
-export default function AlertDialog() {
+interface Post {
+  id: string;
+}
+
+export default function AlertDialog(props: Post) {
   const [open, setOpen] = React.useState(false);
+  const { posts, fetchPosts } = usePosts();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,6 +24,23 @@ export default function AlertDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleDelete = async ({ id }: Post) => {
+    try {
+      const res = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if (res.ok) {
+        fetchPosts();
+        handleClose();
+      } else {
+        throw new Error("Failed to delete post");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -33,14 +56,14 @@ export default function AlertDialog() {
           <DialogTitle id="alert-dialog-title">Delete</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Do you want to delete the post?
+              Do you want to delete this post?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button sx={buttonText} onClick={handleClose}>
-              No
+            <Button onClick={handleClose} sx={buttonTextCancel}>
+              Cancel
             </Button>
-            <Button sx={buttonText} onClick={handleClose} autoFocus>
+            <Button onClick={() => handleDelete(props)} sx={buttonText}>
               Delete
             </Button>
           </DialogActions>
@@ -51,7 +74,10 @@ export default function AlertDialog() {
 }
 
 const buttonText = {
-  color: themeAdmin.palette.darktext.main,
+  color: "tomato",
+};
+const buttonTextCancel = {
+  color: theme.palette.darktext.main,
 };
 
 const deleteIcon = {

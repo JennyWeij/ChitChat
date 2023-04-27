@@ -1,7 +1,7 @@
 import { Box, Divider, ThemeProvider, Typography } from "@mui/material";
 import { useEffect } from "react";
 
-import { usePosts } from "../hooks/usePosts";
+import { usePosts } from "../contexts/PostsContext";
 import { themeAdmin } from "../theme";
 import AdminSinglePost from "./AdminSinglePost";
 import CreatePostForm from "./CreatePostForm";
@@ -56,7 +56,10 @@ export default function AdminPage() {
       <Box sx={{ textAlign: "center" }}>
         <Typography sx={adminTitle}>ADMIN</Typography>
         <Box sx={formBackground}>
-          <CreatePostForm onSubmit={handleCreatePost} />
+          <CreatePostForm
+            onSubmit={handleCreatePost}
+            isEditing={false}
+          />
         </Box>
         <Box sx={wallContainer}>
           <Typography variant="h2">All posts</Typography>
@@ -68,6 +71,7 @@ export default function AdminPage() {
               .map((post) => (
                 <AdminSinglePost
                   key={post._id}
+                  id={post._id}
                   name={post.author?.username || "Missing user"}
                   timestamp={post.createdAt}
                   title={post.title}

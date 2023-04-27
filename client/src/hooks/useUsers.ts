@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
 export interface User {
+  createdAt: string;
+  isAdmin: boolean;
   _id: string;
   username: string;
-  isAdmin: boolean;
-  createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export function useUsers() {

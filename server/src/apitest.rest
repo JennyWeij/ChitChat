@@ -15,8 +15,8 @@ POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "password": "testpassword"
+  "username": "madde20",
+  "password": "12345678"
 }
   
 ### Logout user
@@ -40,6 +40,9 @@ Content-Type: application/json
 
 GET http://localhost:3000/api/posts
 
+### Delete a post
+DELETE http://localhost:3000/api/posts/6447c1945e914780c59b33a7
+
 
 ### Promote user to admin
 PUT http://localhost:3000/api/users/644273b3979df454b9353c9c
@@ -53,11 +56,14 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/users/644273b3979df454b9353c9c
 
 ### PUT a post
-PUT http://localhost:3000/api/posts/644a2e5cb5bb255a16b3a55d
+PUT http://localhost:3000/api/posts/644a3388fcf9b7590be23d76
 Content-Type: application/json
 
 {
+  "_id": "644a3388fcf9b7590be23d76",
   "title": "Hello world",
-  "content": "New content here"
+  "author": "6447b520e9a92ca45b05c146",
+  "content": "New content here",
+  "createdAt": "2023-04-27T08:34:16.438Z"
 }
 
