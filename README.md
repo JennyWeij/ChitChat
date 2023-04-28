@@ -6,9 +6,10 @@ _Denna applikation är skapad för ett utbildningsarbete på Medieinstitutet._
 
 ## Installation
 
-För att komma igång med projektet behöver du göra dessa kommando i terminalen.
+För att komma igång med projektet behöver du göra dessa kommando i terminalen. Först väljer du om du vill vara inne i server-delen eller klient-delen.
 
 ```
+cd client / cd server
 npm install
 npm run dev
 ```
@@ -16,7 +17,7 @@ npm run dev
 Om du vill titta lite närmare kan du även göra dessa kommando i terminalen.
 
 ```
-cd client / cd server
+cd server
 npm test
 ```
 
