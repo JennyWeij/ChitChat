@@ -1,6 +1,6 @@
 # ChitChat
 
-Är en chatapplikation som gåt ut på att skapa en plattform där användare kan registrera sig, logga in och skapa innehåll baserat på en resurs i ett Express-API. Användarinformationen och innehållet har sparas i en MongoDB-databas, och endast skaparen av innehållet ska kunna ändra eller ta bort det samt användare med adminrättigheter. Plattformen har en klientapplikation där alla operationer kan utföras, och innehållet är synligt för alla även om de inte är inloggade.
+Är en chatapplikation som går ut på att skapa en plattform där användare kan registrera sig, logga in och skapa innehåll baserat på en resurs i ett Express-API. Användarinformationen och innehållet har sparas i en MongoDB-databas, och endast skaparen av innehållet ska kunna ändra eller ta bort det samt användare med adminrättigheter. Plattformen har en klientapplikation där alla operationer kan utföras, och innehållet är synligt för alla även om de inte är inloggade.
 
 _Denna applikation är skapad för ett utbildningsarbete på Medieinstitutet._
 
@@ -39,6 +39,6 @@ npm test
 **Skapare:**
 
 Jenny Pettersson,
-Madeleine Gustafson,
+Madeleine Gustafsson,
 Tara Skoglund,
 Jenny Weijland
