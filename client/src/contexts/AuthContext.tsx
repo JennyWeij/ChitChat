@@ -74,12 +74,6 @@ export default function AuthProvider({ children }: Props) {
 
     if (response.ok) {
       getSession();
-      console.log(
-        "Logging in with username:",
-        username,
-        "and password:",
-        password
-      );
       return true;
     } else {
       const data = await response.json();
