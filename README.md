@@ -14,10 +14,9 @@ npm install
 npm run dev
 ```
 
-Om du vill titta lite närmare kan du även göra dessa kommando i terminalen.
+Om du vill köra testerna kan du göra detta kommando i terminalen.
 
 ```
-cd server
 npm test
 ```
 
