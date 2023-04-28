@@ -42,3 +42,6 @@ Jenny Pettersson,
 Madeleine Gustafsson,
 Tara Skoglund,
 Jenny Weijland
+
+**Presentationen:**
+(Länk)[https://www.canva.com/design/DAFgFakKrGI/eyUZqMUP5Sol8baV7O9frw/edit?utm_content=DAFgFakKrGI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton]
