@@ -85,7 +85,7 @@ const panel = {
   justifyContent: "space-between",
   p: "0.5rem",
   borderRadius: "0.5rem",
-  width: { xs: "20rem", sm: "30rem" },
+  width: { xs: "16rem", sm: "25rem" },
 };
 
 

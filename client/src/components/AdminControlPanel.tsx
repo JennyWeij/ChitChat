@@ -22,7 +22,6 @@ export default function AdminControlPanel() {
       });
 
       if (response.ok) {
-        console.log("User promoted to admin");
         fetchUsers();
       } else {
         const data = await response.json();
@@ -40,7 +39,6 @@ export default function AdminControlPanel() {
       });
 
       if (response.ok) {
-        console.log("User deleted");
         fetchUsers();
       } else {
         const data = await response.json();
