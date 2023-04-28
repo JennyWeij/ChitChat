@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/G8PqYEM6)
 # ChitChat
 
 Är en chatapplikation som går ut på att skapa en plattform där användare kan registrera sig, logga in och skapa innehåll baserat på en resurs i ett Express-API. Användarinformationen och innehållet har sparats i en MongoDB-databas, och endast skaparen av innehållet ska kunna ändra eller ta bort det, samt användare med adminrättigheter. Plattformen har en klientapplikation där alla operationer kan utföras, och innehållet är synligt för alla även om de inte är inloggade.
